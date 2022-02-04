@@ -1,0 +1,65 @@
+<div class="relative bg-white">
+  <div class="mx-auto px-4 sm:px-6">
+    <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
+      <!-- name / logo -->
+      <h1 class="text-xl font-bold truncate">
+        {{ shop.name }}
+      </h1>
+
+      <!-- nav menu -->
+      <div class="hidden md:flex space-x-10">
+        {% for link in section.settings.menu.links %}
+          {% if link.links != blank %}
+            <div class="relative">
+              <button class="inline-flex items-center">
+                <!-- Haha! -->
+              </button>
+              <button class="inline-flex items-center">
+                {{ link.title }}
+                {% render 'icon-chevron-down', class: 'w-3 h-3 ml-2' %}
+              </button>
+            </div>
+          {% else %}
+            {% assign isActive = link.current %}
+            <a href="{{ link.url }}" class="text-base text-gray-500 hover:text-gray-700 {% if link.current %}
+              text-red-600
+            {% endif %}">
+              {{ link.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- cart -->
+      <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
+        <a href="/cart" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+          {% render 'icon-shopping-bag' %}
+        </a>
+
+        {% if shop.customer_account_enabled or shop.customer_accounts_optional %}
+          {% if customer %}
+            <a href="/account">Account</a>
+            {{ 'Sign out' | customer_logout_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
+          {% else %}
+            {{ 'Sign in' | customer_login_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
+            {{ 'Sign up' | customer_register_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Heading Navigation Menu"
+    }
+  ]
+}
+{% endschema %}
