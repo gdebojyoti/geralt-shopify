@@ -1,0 +1,35 @@
+{
+  "name": "Template Article",
+  "sections": {
+    "template": {
+      "type": "template-article",
+      "blocks": {
+        "title": {
+          "type": "bla_article_title"
+        },
+        "author": {
+          "type": "author"
+        },
+        "published_date": {
+          "type": "published_date"
+        },
+        "featured_image": {
+          "type": "featured_image"
+        },
+        "article_content": {
+          "type": "article_content"
+        }
+      },
+      "block_order": [
+        "title",
+        "author",
+        "published_date",
+        "featured_image",
+        "article_content"
+      ]
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

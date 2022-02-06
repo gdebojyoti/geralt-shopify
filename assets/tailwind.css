@@ -523,6 +523,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.75rem;
 }
 
+.block {
+  display: block;
+}
+
 .inline {
   display: inline;
 }
