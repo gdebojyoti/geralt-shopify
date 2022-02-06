@@ -8,7 +8,7 @@
       {% endif %}
     {% when 'published_date' %}
       {% if section.settings.enable_date %}
-        {% assign publishedData = article.published_at | date: "%d-%m-%Y" %}
+        {% assign publishedData = article.published_at | date: "%B %e, %Y" %}
         <time datetime="{{ publishedData }}">Published on {{ publishedData }}</time>
       {% endif %}
     {% when 'featured_image' %}
