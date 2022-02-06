@@ -12,9 +12,9 @@
         <time datetime="{{ publishedData }}">Published on {{ publishedData }}</time>
       {% endif %}
     {% when 'featured_image' %}
-      <!-- <img src="{{ article.image | img_url: 'large' }}" alt="{{article.image.alt}}"> -->
+      <img src="{{ article.image | img_url: 'large' }}" alt="{{article.image.alt}}">
     {% when 'article_content' %}
-      <!-- <div>{{ article.content }}</div> -->
+      <div>{{ article.content }}</div>
     {% else %}
       <div>Unknown block!</div>
   {% endcase %}
