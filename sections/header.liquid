@@ -1,3 +1,9 @@
+{% if section.settings.menu.links == blank %}
+  {% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{% else %}
+  {% assign main_menu_linklist = section.settings.menu.links %}
+{% endif %}
+
 <div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
@@ -14,7 +20,7 @@
 
       <!-- nav menu -->
       <nav class="hidden md:flex space-x-10">
-        {% for link in section.settings.menu.links %}
+        {% for link in main_menu_linklist %}
           {% if link.links != blank %}
             {% assign index = link.handle | replace: '-', '_' %}
             <!-- NOTE: this handles multiple single-level dropdown menus; but it doesn't handle multi-level dropdown menus -->
@@ -91,7 +97,7 @@
 
             <!-- nav links -->
             <nav class="pt-3 grid gap-y-7">
-              {% for link in section.settings.menu.links %}
+              {% for link in main_menu_linklist %}
                 {% if link.links != blank %}
                   <div class="relative">
                     <button class="flex justify-between items-center w-full">
