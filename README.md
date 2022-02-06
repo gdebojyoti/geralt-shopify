@@ -29,3 +29,6 @@ things to figure out
 * css variables
 * overriding styles
 * style overrides via props in react (eg: created menu component for desktop; how to override styles of the same component to be used in mobile devices)
+
+read
+* https://stackoverflow.com/questions/54618144/tailwind-css-how-to-code-pixel-perfect-design
