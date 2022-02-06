@@ -7,11 +7,14 @@
       </h1>
 
       <!-- nav menu -->
-      <nav class="hidden md:flex space-x-10" x-data="{ open: false }">
+      <nav class="hidden md:flex space-x-10">
         {% for link in section.settings.menu.links %}
           {% if link.links != blank %}
-            <div class="relative">
-              <button x-on:click="open = !open" class="inline-flex items-center">
+            {% assign index = link.handle | replace: '-', '_' %}
+            <!-- NOTE: this handles multiple single-level dropdown menus; but it doesn't handle multi-level dropdown menus -->
+            <!-- TODO: handle multi-level nested dropdown menus -->
+            <div class="relative" x-data="{ nav_open_{{index}}: false }">
+              <button x-on:click="nav_open_{{index}} = !nav_open_{{index}}" class="inline-flex items-center">
                 {{ link.title }}
                 {% render 'icon-chevron-down', class: 'w-3 h-3 ml-2' %}
               </button>
@@ -23,8 +26,8 @@
                 x-transition:leave="transition ease-out duration-100"
                 x-transition:leave-start="opacity-100 translate-y-0"
                 x-transition:leave-end="opacity-0 translate-y-3"
-                x-show="open"
-                @click.away="open=false"
+                x-show="nav_open_{{index}}"
+                @click.away="nav_open_{{index}}=false"
                 class="absolute z-10 ml-5 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2"
               >
                 <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
