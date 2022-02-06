@@ -1,23 +1,32 @@
 {
-  "name": "Template Article",
   "sections": {
     "template": {
       "type": "template-article",
       "blocks": {
         "title": {
-          "type": "bla_article_title"
+          "type": "bla_article_title",
+          "settings": {
+          }
         },
         "author": {
-          "type": "author"
+          "type": "author",
+          "settings": {
+          }
         },
         "published_date": {
-          "type": "published_date"
+          "type": "published_date",
+          "settings": {
+          }
         },
         "featured_image": {
-          "type": "featured_image"
+          "type": "featured_image",
+          "settings": {
+          }
         },
         "article_content": {
-          "type": "article_content"
+          "type": "article_content",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -26,7 +35,11 @@
         "published_date",
         "featured_image",
         "article_content"
-      ]
+      ],
+      "settings": {
+        "enable_author": true,
+        "enable_date": true
+      }
     }
   },
   "order": [

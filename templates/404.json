@@ -1,8 +1,11 @@
 {
-  "name": "Template 404",
   "sections": {
     "template": {
-      "type": "template-404"
+      "type": "template-404",
+      "settings": {
+        "title": "404",
+        "subtext": "Nope. Go away!!"
+      }
     }
   },
   "order": [

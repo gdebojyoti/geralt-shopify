@@ -1,6 +1,8 @@
 {
-  "current": "Default",
+  "current": {
+  },
   "presets": {
-    "Default": { }
+    "Default": {
+    }
   }
 }
