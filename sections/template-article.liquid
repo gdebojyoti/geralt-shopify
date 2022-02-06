@@ -1,24 +1,28 @@
-{% for block in section.blocks %}
-  {% case block.type %}
-    {% when 'bla_article_title' %}
-      <h1>{{ article.title }}</h1>
-    {% when 'author' %}
-      {% if section.settings.enable_author %}
-        <small>Written by {{ article.author }}</small>
-      {% endif %}
-    {% when 'published_date' %}
-      {% if section.settings.enable_date %}
-        {% assign publishedData = article.published_at | date: "%B %e, %Y" %}
-        <time datetime="{{ publishedData }}">Published on {{ publishedData }}</time>
-      {% endif %}
-    {% when 'featured_image' %}
-      <img src="{{ article.image | img_url: 'large' }}" alt="{{article.image.alt}}">
-    {% when 'article_content' %}
-      <div>{{ article.content }}</div>
-    {% else %}
-      <div>Unknown block!</div>
-  {% endcase %}
-{% endfor %}
+<article itemscope itemtype="https://schema.org/BlogPosting">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'bla_article_title' %}
+        <h1 itemprop="headline">{{ article.title }}</h1>
+      {% when 'author' %}
+        {% if section.settings.enable_author %}
+          <div itemscope itemtype="https://schema.org/Person">
+            <small itemprop="author">Written by {{ article.author }}</small>
+          </div>
+        {% endif %}
+      {% when 'published_date' %}
+        {% if section.settings.enable_date %}
+          {% assign publishedData = article.published_at | date: "%B %e, %Y" %}
+          <time itemprop="datePublished dateCreated" datetime="{{ publishedData }}">Published on {{ publishedData }}</time>
+        {% endif %}
+      {% when 'featured_image' %}
+        <img itemprop="image" src="{{ article.image | img_url: 'large' }}" alt="{{article.image.alt}}">
+      {% when 'article_content' %}
+        <div itemprop="articleBody">{{ article.content }}</div>
+      {% else %}
+        <div>Unknown block!</div>
+    {% endcase %}
+  {% endfor %}
+</article>
 
 {% if blog.comments_enabled? %}
   <div id="comments" class="mt-7">
