@@ -10,6 +10,7 @@
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'tailwind.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
+  <script src="https://unpkg.com/alpinejs" defer></script>
 </head>
 <body>
   {% section 'header' %}

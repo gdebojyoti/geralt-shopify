@@ -7,17 +7,36 @@
       </h1>
 
       <!-- nav menu -->
-      <div class="hidden md:flex space-x-10">
+      <nav class="hidden md:flex space-x-10" x-data="{ open: false }">
         {% for link in section.settings.menu.links %}
           {% if link.links != blank %}
             <div class="relative">
-              <button class="inline-flex items-center">
-                <!-- Haha! -->
-              </button>
-              <button class="inline-flex items-center">
+              <button x-on:click="open = !open" class="inline-flex items-center">
                 {{ link.title }}
                 {% render 'icon-chevron-down', class: 'w-3 h-3 ml-2' %}
               </button>
+
+              <div
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 translate-y-3"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-out duration-100"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-3"
+                x-show="open"
+                @click.away="open=false"
+                class="absolute z-10 ml-5 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2"
+              >
+                <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
+                  <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                    {% for link in link.links %}
+                      <a href="{{ link.url }}" class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-100">
+                        <div class="ml4 text-gray-900 text-base font-medium">{{ link.title }}</div>
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
             </div>
           {% else %}
             {% assign isActive = link.current %}
@@ -28,7 +47,7 @@
             </a>
           {% endif %}
         {% endfor %}
-      </div>
+      </nav>
 
       <!-- cart -->
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
