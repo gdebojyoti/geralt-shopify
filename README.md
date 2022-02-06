@@ -7,3 +7,25 @@ Base project - https://github.com/polidario/Elizabeth_Clean
 ## Code
 
 `npx tailwind -i .\src\tailwind.css -o .\assets\tailwind.css --watch`
+
+
+## Tailwind CSS stuff
+
+cons
+* code readability; humongous class attribute length - especially when hover states also need to be styled
+* *research pending*
+
+pros
+* tiny
+* scalable
+
+things to figure out
+* states (hover, selected, etc) // peer-checked:text-white
+* transitions & animations
+* responsive styles; define custom viewport sizes
+* background images
+* multiple bg shadow or bg img
+* theme / dark mode support
+* css variables
+* overriding styles
+* style overrides via props in react (eg: created menu component for desktop; how to override styles of the same component to be used in mobile devices)
