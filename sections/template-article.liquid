@@ -22,8 +22,23 @@
 
 {% if blog.comments_enabled? %}
   <div id="comments" class="mt-7">
+    <!-- show comments -->
     {% if article.comments_count > 0 %}
-      <!-- show comments -->
+      <div>
+        {% paginate article.comments by 5 %}
+          {% for comment in article.comments %}
+            <div id="{{comment.id}}">
+              <div>{{ comment.author }}</div>
+              <div>Posted on {{ comment.created_at | date: "%B %e, %Y" }}</div>
+              <p class="text-small">{{ comment.content }}</p>
+            </div>
+          {% endfor %}
+
+          {% if paginate.pages > 1 %}
+            {{ paginate | default_pagination }}
+          {% endif %}
+        {% endpaginate %}
+      </div>
     {% else %}
       No comments available.
     {% endif %}
@@ -32,6 +47,19 @@
   <!-- comments form -->
   <div id="comments-form" class="mt-7">
     {% form 'new_comment', article %}
+      <!-- show errors (if any) -->
+      {% if form.errors %}
+        Please check errors!
+        <ul>
+          {% for error in form.errors %}
+            <li>{{ form.errors.messages[error] }}</li>
+          {% endfor %}
+        </ul>
+      <!-- show success msg -->
+      {% elsif form.posted_successfully? %}
+        Comment posted successfully!
+      {% endif %}
+
       <div class="mx-auto w-[300px]">
         <div class="flex flex-col mt-2">
           <label id="comment_author" class="text-gray-700 font-medium">Name</label>
