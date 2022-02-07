@@ -1,0 +1,48 @@
+<h1>{{ section.settings.title }}</h1>
+{% paginate collections by section.settings.count %}
+  <div class="flex justify-around flex-wrap">
+    {% for collection in collections limit: 5 %}
+      {% if collection.all_products_count > 0 %}
+        <a href="{{ collection.url }}">
+          {% if collection.featured_image != blank %}
+            {% assign img = collection.featured_image %}
+          {% else %}
+            {% assign img = collection.products.first.image %}
+          {% endif %}
+
+          {% if img != blank %}
+            <img src="{{ img | img_url: 'medium' }}" alt="{{ collection.title | escape }}">
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
+          {% endif %}
+
+          {{ collection.title | escape }}
+        </a>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+  {% render 'pagination', paginate: paginate %}
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Template List Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "All collections"
+    },
+    {
+      "type": "range",
+      "id": "count",
+      "default": 4,
+      "min": 2,
+      "max": 12,
+      "label": "Collections per page"
+    }
+  ]
+}
+{% endschema %}
