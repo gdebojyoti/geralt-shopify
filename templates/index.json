@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured Collection",
+        "collection": "all",
+        "number": 4
+      }
+    }
+  },
+  "order": [
+    "featured-collection"
+  ]
+}
