@@ -559,12 +559,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100vh;
 }
 
-.h-6 {
-  height: 1.5rem;
-}
-
 .h-20 {
   height: 5rem;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
 
 .w-3 {
@@ -583,12 +583,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 300px;
 }
 
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-20 {
   width: 5rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .max-w-md {
@@ -667,6 +667,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .divide-y-2 > :not([hidden]) ~ :not([hidden]) {
