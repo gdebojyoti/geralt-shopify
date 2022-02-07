@@ -1,6 +1,6 @@
 {
   "name": "geralt-shopify",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/gdebojyoti/geralt-shopify.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Debojyoti Ghosh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gdebojyoti/geralt-shopify/issues"
