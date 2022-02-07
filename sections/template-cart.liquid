@@ -1,0 +1,107 @@
+<div>
+  <div class="flex justify-between items-center">
+    <h1>Your cart</h1>
+    <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+  </div>
+</div>
+
+{% if cart.item_count > 0 %}
+  <div>
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <table>
+        <thead>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr>
+              <td>
+                <a href="{{ item.url }}">
+                  {% if item.image %}
+                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}" class="w-20 h-20 object-cover">
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
+                  {% endif %}
+
+                </a>
+                <div>{{ item.product.title | escape }}</div>
+                <div>{{ item.variant.title | escape }}</div>
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"></a>
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  id="updates_{{ forloop.index }}"
+                  min="1"
+                  class="w-20 border p-2"
+                >
+              </td>
+
+              <td>
+                {{ item.line_price | money }}
+              </td>
+            </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+
+      <!-- notes -->
+      <div>
+        <label for="cart_notes"></label>
+        <textarea name="note" id="cart_notes"></textarea>
+      </div>
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'subtotal' %}
+            <div>Sub total: {{ cart.total_price | money }}</div>
+          {% when 'update_button' %}
+            <button name="update">Update cart</button>
+          {% when 'checkout_button' %}
+            <button type="submit" name="checkout">Checkout</button>
+          {% else %}
+            <div>Unknown block!</div>
+        {% endcase %}
+      {% endfor %}
+
+      
+
+      <div>
+        <button name="update">Update cart</button>
+        
+      </div>
+    </form>
+  </div>
+{% else %}
+  <div class="max-w-6xl">
+    No items found!
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Template Cart",
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "Subtotal",
+      "limit": 1
+    },
+    {
+      "type": "update_button",
+      "name": "Update Button",
+      "limit": 1
+    },
+    {
+      "type": "checkout_button",
+      "name": "Checkout Button",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}
