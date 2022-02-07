@@ -4,7 +4,7 @@
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx tailwind -i ./src/tailwind.css -o ./assets/tailwind.css --watch"
   },
   "repository": {
     "type": "git",
