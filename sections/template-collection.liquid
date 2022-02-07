@@ -1,4 +1,4 @@
-{% paginate collection.products by 5 %}
+{% paginate collection.products by section.settings.count %}
   {% for product in collection.products %}
     {% render 'product-card', product: product %}
   {% else %}
@@ -7,3 +7,17 @@
 
   {% render 'pagination', paginate: paginate %}
 {% endpaginate %}
+
+{% schema %}
+{
+  "name": "Template Collection",
+  "settings": [
+    {
+      "type": "number",
+      "id": "count",
+      "label": "Products per page",
+      "default": 5
+    }
+  ]
+}
+{% endschema %}
