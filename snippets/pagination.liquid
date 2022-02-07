@@ -1,0 +1,24 @@
+<!-- NOTE: pass `paginate` as parameter from parent; else the following won't work -->
+{% if paginate.pages > 0 %}
+  <nav role="navigation" class="flex space-x-2">
+    <!-- previous page -->
+    {% if paginate.previous %}
+      <a href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+      {% if part.is_link %}
+        <!-- page number link -->
+        <a href="{{ part.url }}">{{ part.title }}</a>
+      {% else %}
+        <!-- for current page & "..." -->
+        <span>{{ part.title }}</span>
+      {% endif %}
+    {% endfor %}
+
+    <!-- next page -->
+    {% if paginate.next %}
+      <a href="{{ paginate.next.url }}">{{ paginate.next.title }}</a>
+    {% endif %}
+  </nav>
+{% endif %}
