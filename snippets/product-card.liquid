@@ -1,0 +1,11 @@
+<!-- NOTE: pass `product` as parameter from parent; else the following won't work -->
+<div>
+  {% if product.featured_image %}
+    <img src="{{product.featured_image | img_url: 'thumb'}}" alt="{{product.featured_image.alt}}">
+  {% else %}
+    {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
+  {% endif %}
+  <span>{{product.vendor}}</span>
+  <a href="{{ product.url }}">{{product.title}}</a>
+  <p>{{ product.price | money }}</p>
+</div>

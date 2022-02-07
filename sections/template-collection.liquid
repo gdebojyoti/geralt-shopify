@@ -1,15 +1,6 @@
 {% paginate collection.products by 5 %}
   {% for product in collection.products %}
-    <div>
-      {% if product.featured_image %}
-        <img src="{{product.featured_image | img_url: 'thumb'}}" alt="{{product.featured_image.alt}}">
-      {% else %}
-        {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
-      {% endif %}
-      <span>{{product.vendor}}</span>
-      <a href="{{ product.url }}">{{product.title}}</a>
-      <p>{{ product.price | money }}</p>
-    </div>
+    {% render 'product-card', product: product %}
   {% else %}
     <p>No products found!</p>
   {% endfor %}
