@@ -1,0 +1,52 @@
+{% form 'contact' %}
+  <div class="flex flex-col items-center my-8">
+    <!-- post form submission -->
+    {% if form.errors %}
+      Please check errors!
+      <ul>
+        {% for error in form.errors %}
+          <li>{{ form.errors.messages[error] }}</li>
+        {% endfor %}
+      </ul>
+    <!-- show success msg -->
+    {% elsif form.posted_successfully? %}
+      {{ section.settings.thank_you_message }}
+    {% endif %}
+
+    <label for="name">Your name</label>
+    <input class="border p-2" type="text" id="name" name="contact[name]" placeholder="Harry Potter">
+
+    <label for="email">Your email</label>
+    <input type="email" id="email" name="contact[email]">
+
+    <label for="phone">Your phone</label>
+    <input type="tel" id="phone" name="contact[phone]">
+    
+    <!-- <label for="custom-field">Custom field heading</label>
+    <textarea rows="10" id="custom-field" name="contact[customfield]"></textarea> -->
+
+    <label for="msg">What is your message?</label>
+    <textarea rows="10" id="msg" name="contact[body]"></textarea>
+
+    <input type="submit" value="send">
+  </div>
+{% endform %}
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+   {
+      "type": "text",
+      "id": "thank_you_message",
+      "default": "Thanks for reaching out to us. We'll get back to you asap!",
+      "label": "Thank you message"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form" /* this name will appear in the dropdown list ("theme sections") */
+    }
+  ]
+}
+{% endschema %}
