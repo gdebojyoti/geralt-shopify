@@ -1,3 +1,7 @@
+{% if section.settings.title != blank %}
+  <h2>{{ section.settings.title }}</h2>
+{% endif %}
+
 {% form 'contact' %}
   <div class="flex flex-col items-center my-8">
     <!-- post form submission -->
@@ -36,7 +40,12 @@
 {
   "name": "Contact form",
   "settings": [
-   {
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
       "type": "text",
       "id": "thank_you_message",
       "default": "Thanks for reaching out to us. We'll get back to you asap!",
