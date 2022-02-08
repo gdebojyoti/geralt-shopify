@@ -1,3 +1,6 @@
+<!-- link to all collections -->
+<a href="{{ routes.collections_url }}">Go back to Collections</a>
+
 {% paginate collection.products by section.settings.count %}
   {% for product in collection.products %}
     {% render 'product-card', product: product %}
