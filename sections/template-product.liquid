@@ -1,0 +1,230 @@
+<!-- 4 types of media - photo, video, embedded video (YT), 3d models -->
+
+<!-- swiper -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<style>
+  .swiper-button-prev, .swiper-button-next {
+    height: 20px;
+    color: #000;
+    /* top: auto; */
+  }
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  /* .swiper-pagination {
+    bottom: 0 !important;
+  } */
+  .swiper-pagination-bullet-active {
+    background-color: #000;
+  }
+</style>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+  <!-- media -->
+  <div class="product--media">
+    <div class="md:block hidden">
+      {% for media in product.media %}
+        <div class="h-100">
+          {% render 'product-media', media: media %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="md:hidden">
+      <!-- swiper carousel -->
+      <div class="swiper h-94">
+        <div class="swiper-wrapper">
+          {% for media in product.media %}
+            <div class="swiper-slide">
+              <div class="h-80 overflow-hidden p-2">
+                {% render 'product-media', media: media %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- swiper controls -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- information -->
+  <div class="product--information">
+    
+    {% form 'product', product %}
+      {% assign selected_variant = product.selected_or_first_available_variant %}
+
+      <input type="hidden" name="id" value="{{ selected_variant.id }}">
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'vendor' %}
+            <div>{{ product.vendor }}</div>
+          
+          {% when 'title' %}
+            <h1>{{ product.title }}</h1>
+          
+          {% when 'price' %}
+            <div class="line-through">{{ selected_variant.compare_at_price | money }}</div>
+            <div>{{ selected_variant.price | money }}</div>
+            {% if selected_variant.compare_at_price > selected_variant.price %}
+              <span>On Sale!</span>
+            {% endif %}
+          
+          {% when 'variant_selector' %}
+            {% unless product.has_only_default_variant %}
+              <div
+                data-url="{{ product.url }}"
+                data-section="{{ section.id }}"
+              >
+                {% for option in product.options_with_values %}
+                  <label for="option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <div>
+                    <select
+                      name="options[{{ option.name | escape }}]"
+                      id="option-{{ section.id }}-{{ forloop.index0 }}"
+                    >
+                      {% for value in option.values %}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {{ value | escape }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endunless %}
+          
+          {% when 'quantity' %}
+            <div>
+              <label for="quantity-{{ section.id }}">Quantity</label>
+              <input class="border p-2" type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
+            </div>
+          
+          {% when 'description' %}
+            <div>{{ product.description }}</div>
+          
+          {% when 'checkout_buttons' %}
+            <div>
+              {% if selected_variant.available %}
+                <button type="submit" name="add">
+                  Add to cart
+                </button>
+              {% else %}
+                Sold out!
+              {% endif %}
+              <!-- <button type="submit">
+                Checkout
+              </button> -->
+            </div>
+          
+          {% else %}
+            <div>Unknown block!</div>
+        {% endcase %}
+      {% endfor %}
+      
+    {% endform %}
+  </div>
+</div>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
+    pagination: {
+      el: '.swiper-pagination'
+    },
+    navigation: {
+      prevEl: '.swiper-button-prev',
+      nextEl: '.swiper-button-next'
+    }
+  })
+</script>
+
+<div class="h-2 bg-gray-300 my-10"></div>
+
+<!-- 
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+<img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+{% for image in product.images %}
+  <a href="{{ image.src | img_url: 'large' }}">
+    <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+  </a>
+{% endfor %}
+<h1>{{ product.title }}</h1>
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+  <select name="id" id="productSelect">
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        <option value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - sold out
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+  {{ current_variant.price | money }}
+  <label for="Quantity">quantity</label>
+  <input type="number" id="Quantity" name="quantity" value="1" min="1">
+  <button type="submit" name="add" id="AddToCart">Add to cart</button>
+</form>
+<div>{{ product.description }}</div>
+-->
+
+{% schema %}
+{
+  "name": "Product",
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_selector",
+      "name": "Variant selector",
+      "limit": 1
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "checkout_buttons",
+      "name": "Checkout buttons",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}
