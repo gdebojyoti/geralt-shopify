@@ -66,4 +66,14 @@
     class="cursor-pointer">
     Forgot password?
   </u>
+
+  <!-- guest login -->
+  {% if shop.checkout.guest_login %}
+    <hr class="my-5">
+    <div class="flex justify-center">
+      {% form 'guest_login' %}
+        <button class="rounded-sm bg-gray-800 text-white p-2" type="submit">Continue as guest</button>
+      {% endform %}
+    </div>
+  {% endif %}
 </div>
