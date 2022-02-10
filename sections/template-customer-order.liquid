@@ -1,4 +1,47 @@
-<!-- /templates/customers/order.liquid -->
+<div>
+  <h1>Order page</h1>
+
+  <div>name: {{ order.name }}</div>
+
+  <h2>Order Items</h2>
+  <table>
+    {% for line_item in order.line_items %}
+    <tr>
+      <td>{{ line_item.title | link_to: line_item.product.url }}</td>
+      <td>{{ line_item.sku }}</td>
+      <td>{{ line_item.original_price | money }}</td>
+      <td>{{ line_item.quantity }}</td>
+      <td>{{ line_item.line_price | money }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div>
+    <h3>Details</h3>
+
+    <div>{{ order.fulfillment_status_label }}</div>
+    <div>{{ order.financial_status_label }}</div>
+    
+    <div>{{ order.subtotal_price | money }}</div>
+    <div>{{ order.shipping_price | money }}</div>
+    <div>{{ order.total_price | money }}</div>
+  </div>
+
+  <div>
+    <h3>Billing address</h3>
+
+    {{ order.billing_address | format_address }}
+  </div>
+
+  <div>
+    <h3>Shipping address</h3>
+
+    {{ order.shipping_address | format_address }}
+  </div>
+</div>
+
+
+<!-- 
 
 <h2>Billing Address</h2>
 <p><span>Payment Status:</span> <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
@@ -18,15 +61,4 @@
 <p>{{ order.shipping_address.country }} {{ order.shipping_address.zip }}</p>
 <p>{{ order.shipping_address.phone }}</p>
 
-<h2>Order Items</h2>
-<table>
-  {% for line_item in order.line_items %}
-  <tr>
-    <td>{{ line_item.title | link_to: line_item.product.url }}</td>
-    <td>{{ line_item.sku }}</td>
-    <td>{{ line_item.original_price | money }}</td>
-    <td>{{ line_item.quantity }}</td>
-    <td>{{ line_item.line_price | money }}</td>
-  </tr>
-  {% endfor %}
-</table>
+-->
