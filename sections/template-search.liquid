@@ -1,0 +1,59 @@
+<h1>{{ section.settings.title }}</h1>
+
+{% paginate search.results by 0 %}
+  <!-- TODO: considering adding a search bar here -->
+
+  {% if search.performed %}
+    {% if search.results.size > 0 %}
+      {% assign count_string = '<b>' | append: search.results_count | append: '</b>' %}
+      {% assign query = '<b>' | append: search.terms | append: '</b>' %}
+      {{ section.settings.results_text | replace: '__count__', count_string | replace: '__query__', query }}
+      {% for item in search.results %}
+        {% case item.object_type %}
+          {% when 'product' %}
+            {% render 'product-card', product: item %}
+          {% else %}
+            
+        {% endcase %}
+      {% endfor %}
+    {% else %}
+      {% assign query = '<b>' | append: search.terms | append: '</b>' %}
+      {{ section.settings.no_results_text | replace: '__query__', query }}
+    {% endif %}
+  {% endif %}
+
+  {% render 'pagination', paginate: paginate %}
+{% endpaginate %}
+
+
+{% schema %}
+{
+  "name": "Search page customization",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Settings"
+  },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Search results",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "results_text",
+      "default": "__count__ results found for __query__",
+      "label": "Subtitle",
+      "info": "Hint: use \"__count__\" for result count and \"__query__\" for search term"
+    },
+    {
+      "type": "text",
+      "id": "no_results_text",
+      "default": "Sorry, no results found for __query__",
+      "label": "Text for no results",
+      "info": "Hint: use \"__query__\" for search term"
+    }
+  ]
+}
+{% endschema %}
