@@ -1,0 +1,66 @@
+<div class="w-96 mx-auto">
+  <h2>Create account</h2>
+
+  {% form 'create_customer' %}
+  
+    <!-- form errors -->
+    {{ form.errors | default_errors }}
+  
+    <div class="flex flex-col">
+      <label for="first-name">First name</label>
+      <input
+        class="border rounded-sm p-2"
+        type="text"
+        id="first-name"
+        name="customer[first_name]"
+        autocomplete="given-name"
+        placeholder="Harry">
+    </div>
+  
+    <div class="flex flex-col">
+      <label for="last-name">Last name</label>
+      <input
+        class="border rounded-sm p-2"
+        type="text"
+        id="last-name"
+        name="customer[last_name]"
+        autocomplete="family-name"
+        placeholder="Potter">
+    </div>
+  
+    <!-- sample custom data -->
+    <div class="flex flex-col">
+      <label for="birthday">DOB</label>
+      <input
+        class="border rounded-sm p-2"
+        type="date"
+        id="birthday"
+        name="customer[note][birthdate]">
+    </div>
+  
+    <div class="flex flex-col">
+      <label for="email">Email address</label>
+      <input
+        class="border rounded-sm p-2"
+        type="email"
+        id="email"
+        name="customer[email]"
+        autocomplete="email"
+        placeholder="harry.potter@hogwarts.com">
+    </div>
+  
+    <div class="flex flex-col">
+      <label for="password">Password</label>
+      <input
+        class="border rounded-sm p-2"
+        type="password"
+        id="password"
+        name="customer[password]"
+        autocomplete="new-password"
+        placeholder="••••••••">
+    </div>
+  
+    <button class="rounded-sm bg-gray-800 text-white p-2" type="submit">Register</button>
+  
+  {% endform %}
+</div>
