@@ -58,7 +58,7 @@
   <!-- information -->
   <div class="product--information">
     
-    {% form 'product', product %}
+    {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       {% assign selected_variant = product.selected_or_first_available_variant %}
 
       <input type="hidden" name="id" value="{{ selected_variant.id }}">
@@ -72,15 +72,17 @@
             <h1>{{ product.title }}</h1>
           
           {% when 'price' %}
-            <div class="line-through">{{ selected_variant.compare_at_price | money }}</div>
-            <div>{{ selected_variant.price | money }}</div>
-            {% if selected_variant.compare_at_price > selected_variant.price %}
-              <span>On Sale!</span>
-            {% endif %}
+            <div id="price-{{ section.id }}">
+              <div class="line-through">{{ selected_variant.compare_at_price | money }}</div>
+              <div>{{ selected_variant.price | money }}</div>
+              {% if selected_variant.compare_at_price > selected_variant.price %}
+                <span>On Sale!</span>
+              {% endif %}
+            </div>
           
           {% when 'variant_selector' %}
             {% unless product.has_only_default_variant %}
-              <div
+              <variant-selector
                 data-url="{{ product.url }}"
                 data-section="{{ section.id }}"
               >
@@ -103,8 +105,13 @@
                       {% endfor %}
                     </select>
                   </div>
+
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+
                 {% endfor %}
-              </div>
+              </variant-selector>
             {% endunless %}
           
           {% when 'quantity' %}
@@ -138,6 +145,74 @@
     {% endform %}
   </div>
 </div>
+
+<script>
+  class VariantSelector extends HTMLElement {
+    constructor () {
+      super()
+      this.addEventListener('change', this.onChange)
+    }
+
+    onChange (data) {
+      this.getSelectedOptions()
+      this.getSelectedVariant()
+      if (this.currentVariant) {
+        this.updateUrl()
+        this.updateFormId()
+        this.updatePrice()
+      }
+    }
+
+    getSelectedOptions () {
+      this.options = Array.from(this.querySelectorAll('select'), select => select.value)
+    }
+
+    getSelectedVariant () {
+      this.currentVariant = this.getVariantJson().find(variant => {
+        const findings = !variant.options.map((option, index) => this.options[index] === option)
+          .includes(false)
+
+        if (findings) {
+          return variant
+        }
+      })
+    }
+
+    getVariantJson () {
+      this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent)
+      return this.variantData
+    }
+
+    updateUrl () {
+      window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`)
+    }
+
+    updateFormId () {
+      const form = document.querySelector('#product-form')
+      const input = form.querySelector('input[name="id"')
+
+      input.value = this.currentVariant.id
+    }
+
+    updatePrice () {
+      fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+        .then(res => res.text())
+        .then(text => {
+          const html = new DOMParser().parseFromString(text, 'text/html')
+          
+          const id = `price-${this.dataset.section}`
+          const oldPrice = document.getElementById(id)
+          const newPrice = html.getElementById(id)
+
+          if (oldPrice && newPrice) {
+            oldPrice.innerHTML = newPrice.innerHTML
+          }
+        })
+    }
+  }
+  
+  customElements.define("variant-selector", VariantSelector)
+</script>
 
 <script>
   const swiper = new Swiper('.swiper', {
