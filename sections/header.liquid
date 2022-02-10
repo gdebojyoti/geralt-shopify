@@ -4,7 +4,7 @@
   {% assign main_menu_linklist = section.settings.menu.links %}
 {% endif %}
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+<div class="relative bg-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
       <!-- name / logo -->
@@ -12,6 +12,7 @@
         {{ shop.name }}
       </h1>
 
+      <!-- mobile nav icon -->
       <div class="-mr-2 -my-2 md:hidden">
         <button x-on:click="mobileMenuOpen = true" type="button" class="bg-white p-2 inline-flex items-center justify-center focus:outline-none">
           {% render 'icon-menu' %}
@@ -64,8 +65,12 @@
         {% endfor %}
       </nav>
 
-      <!-- cart -->
+      <!-- top right menu (search, cart, account) -->
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
+        <button x-on:click="searchBarOpen = true" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+          {% render 'icon-search' %}
+        </button>
+
         <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-shopping-bag' %}
         </a>
@@ -122,6 +127,20 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- search bar -->
+  <div x-cloak x-show="searchBarOpen" class="absolute w-full h-96 bg-white top-0">
+    <!-- close button -->
+    <button x-on:click="searchBarOpen = false" class="absolute top-5 right-5">
+      {% render 'icon-x' %}
+    </button>
+
+    <!-- form -->
+    <form class="pt-10" action="{{ routes.search_url }}">
+      <input class="w-full p-4 text-5xl" type="search" name="q" placeholder="Type and press enter">
+      <button type="submit">Search</button>
+    </form>
   </div>
 </div>
 
