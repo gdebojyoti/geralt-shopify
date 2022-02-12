@@ -28,7 +28,15 @@
         {% endif %}
 
         <button x-on:click="{{ formId }} = true">Edit</button>
-        <button>Delete</button>
+        <button
+          x-on:click=""
+          data-delete-address
+          data-url="{{ address.url }}"
+          >Delete</button>
+
+        <form action="{{ address.url }}" method="post">
+          <input type="hidden" name="_method" value="delete" >
+        </form>
 
         <div
           x-cloak
@@ -53,6 +61,7 @@
     constructor () {
       this.initialize()
       this.addressesSelector()
+      this.initializeDeleteAddressButtons()
     }
 
     initialize () {
@@ -129,6 +138,27 @@
             } else {
               provinceSelector.innerHTML += `<option value="${provinces[index][0]}">${provinces[index][1]}</option>`
             }
+          }
+        })
+      })
+    }
+
+    initializeDeleteAddressButtons () {
+      const deleteButtons = document.querySelectorAll("button[data-delete-address]")
+      if (!deleteButtons.length) {
+        return
+      }
+
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+          const form = document.querySelector(`form[action="${this.dataset.url}"]`)
+          if (!form) {
+            return
+          }
+
+          const confirmation = window.confirm("Do you want to delete this address?")
+          if (confirmation) {
+            form.submit()
           }
         })
       })
