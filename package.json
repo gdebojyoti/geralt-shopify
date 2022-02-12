@@ -1,6 +1,6 @@
 {
   "name": "geralt-shopify",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
