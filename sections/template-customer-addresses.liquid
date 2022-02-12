@@ -1,92 +1,52 @@
-<div>
+<div x-data="{ newForm: false }">
   <h1>My addresses</h1>
 
-  <button>Create new address</button>
+  <button x-on:click="newForm = true">Create new address</button>
+
+  <div
+    x-cloak
+    x-show="newForm"
+    class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white"
+    >
+    <button
+      x-on:click="newForm = false"
+      class="absolute top-5 right-5"
+    >Close</button>
+    {% render 'component-address-form', address: customer.new_address, main_cta: 'Create address' %}
+  </div>
 </div>
 
 {% paginate customer.addresses by 10 %}
-  <div class="flex">
+  <div class="flex flex-wrap">
     {% for address in customer.addresses %}
-      <div class="border p-5 rounded-sm">
+      {% assign formId = 'addressForm' | append: address.id %}
+      <div x-data="{ {{ formId }}: false }" class="border p-5 rounded-sm w-40 flex-shrink-0">
         {{ address | format_address }}
 
         {% if address == customer.default_address %}
           <b>Default</b>
         {% endif %}
 
-        <button>Edit</button>
+        <button x-on:click="{{ formId }} = true">Edit</button>
         <button>Delete</button>
+
+        <div
+          x-cloak
+          x-show="{{formId}}"
+          class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white"
+          >
+          <button
+            x-on:click="{{ formId }} = false"
+            class="absolute top-5 right-5"
+          >Close</button>
+          {% render 'component-address-form', address: address, main_cta: 'Save address' %}
+        </div>
       </div>
     {% endfor %}
   </div>
 
   {% render 'pagination', paginate: paginate %}
 {% endpaginate %}
-
-<div>
-  <h2>New Address</h2>
-  {% form 'customer_address', customer.new_address, class: 'flex flex-col' %}
-
-  {{ form.errors | default_errors }}
-
-  <div>
-    <label for="first_name">First Name</label>
-    <input class="border p-3" type="text" value="" name="address[first_name]" size="30" />
-  </div>
-
-  <div>
-    <label for="last_name">Last Name</label>
-    <input class="border p-3" type="text" value="" name="address[last_name]" size="30" />
-  </div>
-
-  <div>
-    <label for="company">Company</label>
-    <input class="border p-3" type="text" value="" name="address[company]" />
-  </div>
-
-  <div>
-    <label for="address1">Address 1</label>
-    <input class="border p-3" type="text" value="" name="address[address1]" />
-  </div>
-
-  <div>
-    <label for="address2">Address 2</label>
-    <input class="border p-3" type="text" value="" name="address[address2]" />
-  </div>
-
-  <div>
-    <label for="city">City</label>
-    <input class="border p-3" type="text" value="" name="address[city]" />
-  </div>
-
-  
-  <div>
-    <label for="country">Country</label>
-    <select name="address[country]" data-country-selector data-form-id="{{ form.id }}">
-      {{ all_country_option_tags }}
-    </select>
-  </div><!-- See docs for @shopify/theme-addresses to support Country and Province -->
-
-  <div>
-    <label for="province">Province</label>
-    <select id="province-{{ form.id }}" name="address[province]"></select>
-  </div>
-
-  <div>
-    <label for="zip">Zip/Post Code</label>
-    <input class="border p-3" type="text" value="" name="address[zip]" />
-  </div>
-
-  <div>
-    <label for="phone">Phone Number</label>
-    <input class="border p-3" type="tel" value="" name="address[phone]" />
-  </div>
-
-  <button type="submit">Create address</button>
-  <button type="reset">Reset</button>
-
-  {% endform %}
-</div>
 
 <script>
   class CustomerAddress {
