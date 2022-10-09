@@ -1,5 +1,12 @@
 <!-- 4 types of media - photo, video, embedded video (YT), 3d models -->
 
+<style>
+  /* remove header from product page */
+  #shopify-section-header {
+    display: none;
+  }
+</style>
+
 <!-- swiper -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -7,7 +14,7 @@
 <style>
   .swiper-button-prev, .swiper-button-next {
     height: 20px;
-    color: #000;
+    color: #fff;
     /* top: auto; */
   }
   .swiper-button-prev::after, .swiper-button-next::after {
@@ -17,69 +24,79 @@
   /* .swiper-pagination {
     bottom: 0 !important;
   } */
+  .swiper-pagination-bullet {
+    background-color: #fff;
+  }
   .swiper-pagination-bullet-active {
-    background-color: #000;
+    background-color: #fff;
   }
 </style>
 
+<div class="bg-omega-100 text-gray-100 relative h-screen">
+  <a href="" class="absolute z-50 top-5 left-5 bg-omega-200 text-gray-200 flex p-2 pl-1 rounded-3xl text-xs items-center opacity-80">
+    {% render 'icon-chevron-down', class: 'rotate-90 w-4 h-4 font-extrabold' %} Back
+  </a>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
   <!-- media -->
-  <div class="product--media">
-    <div class="md:block hidden">
-      {% for media in product.media %}
-        <div class="h-100">
-          {% render 'product-media', media: media %}
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="md:hidden">
-      <!-- swiper carousel -->
-      <div class="swiper h-94">
-        <div class="swiper-wrapper">
-          {% for media in product.media %}
-            <div class="swiper-slide">
-              <div class="h-80 overflow-hidden p-2">
-                {% render 'product-media', media: media %}
-              </div>
+  <div class="w-full h-94">
+    <div class="swiper h-full">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          <div class="swiper-slide">
+            <div class="h-80 rounded-b-3xl overflow-hidden">
+              {% render 'product-media', media: media, class: 'h-full' %}
             </div>
-          {% endfor %}
-        </div>
-
-        <!-- swiper controls -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+          </div>
+        {% endfor %}
       </div>
+
+      <!-- swiper controls -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
-  
+
   <!-- information -->
-  <div class="product--information">
+  <div class="product--information p-5">
     
     {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       {% assign selected_variant = product.selected_or_first_available_variant %}
 
       <input type="hidden" name="id" value="{{ selected_variant.id }}">
 
+      <div class="flex">
+        <div>
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'vendor' %}
+                <div class="uppercase text-xs font-bold text-gray-400">{{ product.vendor }}</div>
+              
+              {% when 'title' %}
+                <h1 class="font-light mt-1">{{ product.title }}</h1>
+              
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <div class="shrink-0">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'price' %}
+                <div id="price-{{ section.id }}" class="text-center">
+                  <div class="line-through text-sm text-red-900">{{ selected_variant.compare_at_price | money }}</div>
+                  <div>{{ selected_variant.price | money }}</div>
+                  {% if selected_variant.compare_at_price > selected_variant.price %}
+                    <!-- <span>On Sale!</span> -->
+                  {% endif %}
+                </div>
+              
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+
       {% for block in section.blocks %}
         {% case block.type %}
-          {% when 'vendor' %}
-            <div>{{ product.vendor }}</div>
-          
-          {% when 'title' %}
-            <h1>{{ product.title }}</h1>
-          
-          {% when 'price' %}
-            <div id="price-{{ section.id }}">
-              <div class="line-through">{{ selected_variant.compare_at_price | money }}</div>
-              <div>{{ selected_variant.price | money }}</div>
-              {% if selected_variant.compare_at_price > selected_variant.price %}
-                <span>On Sale!</span>
-              {% endif %}
-            </div>
-          
           {% when 'variant_selector' %}
             {% unless product.has_only_default_variant %}
               <variant-selector
@@ -136,14 +153,32 @@
                 Checkout
               </button> -->
             </div>
-          
-          {% else %}
-            <div>Unknown block!</div>
         {% endcase %}
       {% endfor %}
       
     {% endform %}
   </div>
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 hidden">
+  <!-- media -->
+  <div class="product--media">
+    <div class="md:block hidden">
+      {% for media in product.media %}
+        <div class="h-100">
+          {% render 'product-media', media: media %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="md:hidden">
+      <!-- swiper carousel -->
+      
+    </div>
+  </div>
+  
+  
 </div>
 
 <script>

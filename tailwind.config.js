@@ -11,6 +11,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        omega: {
+          100: '#222',
+          200: '#333'
+        },
+        alpha: {
+          100: '#f7f7f7'
+        }
+      },
       height: {
         "94": "22rem"
       }
