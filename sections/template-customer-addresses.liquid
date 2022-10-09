@@ -6,21 +6,21 @@
   <div
     x-cloak
     x-show="newForm"
-    class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white"
+   
     >
     <button
       x-on:click="newForm = false"
-      class="absolute top-5 right-5"
+     
     >Close</button>
     {% render 'component-address-form', address: customer.new_address, main_cta: 'Create address' %}
   </div>
 </div>
 
 {% paginate customer.addresses by 10 %}
-  <div class="flex flex-wrap">
+  <div>
     {% for address in customer.addresses %}
       {% assign formId = 'addressForm' | append: address.id %}
-      <div x-data="{ {{ formId }}: false }" class="border p-5 rounded-sm w-40 flex-shrink-0">
+      <div x-data="{ {{ formId }}: false }">
         {{ address | format_address }}
 
         {% if address == customer.default_address %}
@@ -41,11 +41,11 @@
         <div
           x-cloak
           x-show="{{formId}}"
-          class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white"
+         
           >
           <button
             x-on:click="{{ formId }} = false"
-            class="absolute top-5 right-5"
+           
           >Close</button>
           {% render 'component-address-form', address: address, main_cta: 'Save address' %}
         </div>

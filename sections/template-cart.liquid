@@ -1,5 +1,5 @@
 <div>
-  <div class="flex justify-between items-center">
+  <div>
     <h1>Your cart</h1>
     <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
   </div>
@@ -20,7 +20,7 @@
               <td>
                 <a href="{{ item.url }}">
                   {% if item.image %}
-                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}" class="w-20 h-20 object-cover">
+                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}">
                   {% else %}
                     {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
                   {% endif %}
@@ -37,7 +37,7 @@
                   value="{{ item.quantity }}"
                   id="updates_{{ forloop.index }}"
                   min="1"
-                  class="w-20 border p-2"
+                 
                 >
               </td>
 
@@ -78,7 +78,7 @@
     </form>
   </div>
 {% else %}
-  <div class="max-w-6xl">
+  <div>
     No items found!
   </div>
 {% endif %}

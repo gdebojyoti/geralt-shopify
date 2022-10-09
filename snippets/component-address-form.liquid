@@ -1,37 +1,37 @@
 <div>
   <h2>New Address</h2>
-  {% form 'customer_address', address, class: 'flex flex-col' %}
+  {% form 'customer_address', address, class: '' %}
 
   {{ form.errors | default_errors }}
 
   <div>
     <label for="first_name">First Name</label>
-    <input class="border p-3" type="text" value="{{ form.first_name }}" name="address[first_name]" size="30" />
+    <input type="text" value="{{ form.first_name }}" name="address[first_name]" size="30" />
   </div>
 
   <div>
     <label for="last_name">Last Name</label>
-    <input class="border p-3" type="text" value="{{ form.last_name }}" name="address[last_name]" size="30" />
+    <input type="text" value="{{ form.last_name }}" name="address[last_name]" size="30" />
   </div>
 
   <div>
     <label for="company">Company</label>
-    <input class="border p-3" type="text" value="{{ form.company }}" name="address[company]" />
+    <input type="text" value="{{ form.company }}" name="address[company]" />
   </div>
 
   <div>
     <label for="address1">Address 1</label>
-    <input class="border p-3" type="text" value="{{ form.address1 }}" name="address[address1]" />
+    <input type="text" value="{{ form.address1 }}" name="address[address1]" />
   </div>
 
   <div>
     <label for="address2">Address 2</label>
-    <input class="border p-3" type="text" value="{{ form.address2 }}" name="address[address2]" />
+    <input type="text" value="{{ form.address2 }}" name="address[address2]" />
   </div>
 
   <div>
     <label for="city">City</label>
-    <input class="border p-3" type="text" value="{{ form.city }}" name="address[city]" />
+    <input type="text" value="{{ form.city }}" name="address[city]" />
   </div>
 
   <div>
@@ -48,12 +48,12 @@
 
   <div>
     <label for="zip">Zip/Post Code</label>
-    <input class="border p-3" type="text" value="{{ form.zip }}" name="address[zip]" />
+    <input type="text" value="{{ form.zip }}" name="address[zip]" />
   </div>
 
   <div>
     <label for="phone">Phone Number</label>
-    <input class="border p-3" type="tel" value="{{ form.phone }}" name="address[phone]" />
+    <input type="tel" value="{{ form.phone }}" name="address[phone]" />
   </div>
 
   <div>

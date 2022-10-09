@@ -25,7 +25,7 @@
 </article>
 
 {% if blog.comments_enabled? %}
-  <div id="comments" class="mt-7">
+  <div id="comments">
     <!-- show comments -->
     {% if article.comments_count > 0 %}
       <div>
@@ -34,7 +34,7 @@
             <div id="{{comment.id}}">
               <div>{{ comment.author }}</div>
               <div>Posted on {{ comment.created_at | date: "%B %e, %Y" }}</div>
-              <p class="text-small">{{ comment.content }}</p>
+              <p>{{ comment.content }}</p>
             </div>
           {% endfor %}
 
@@ -49,7 +49,7 @@
   </div>
 
   <!-- comments form -->
-  <div id="comments-form" class="mt-7">
+  <div id="comments-form">
     {% form 'new_comment', article %}
       <!-- show errors (if any) -->
       {% if form.errors %}
@@ -64,55 +64,55 @@
         Comment posted successfully!
       {% endif %}
 
-      <div class="mx-auto w-[300px]">
-        <div class="flex flex-col mt-2">
-          <label id="comment_author" class="text-gray-700 font-medium">Name</label>
+      <div>
+        <div>
+          <label id="comment_author">Name</label>
           <input
             placeholder="Your name"
             id="comment_author"
             name="comment[author]"
             type="text"
-            class="p-3 border rounded-sm"
+           
           >
         </div>
-        <div class="flex flex-col mt-2">
-          <label id="comment_email" class="text-gray-700 font-medium">Email</label>
+        <div>
+          <label id="comment_email">Email</label>
           <input
             placeholder="Your email"
             id="comment_email"
             name="comment[email]"
             type="email"
-            class="p-3 border rounded-sm"
+           
           >
         </div>
-        <div class="flex flex-col mt-2">
-          <label id="comment_body" class="text-gray-700 font-medium">Comment</label>
+        <div>
+          <label id="comment_body">Comment</label>
           <textarea
             placeholder="Your comment"
             id="comment_body"
             name="comment[body]"
-            class="p-3 border rounded-sm resize-none"
+           
           ></textarea>
         </div>
-        <div class="mt-2">
-          <input type="submit" class="w-full px-4 py-2 bg-green-700 text-white cursor-pointer rounded-sm" value="Post comment">
+        <div>
+          <input type="submit" value="Post comment">
         </div>
       </div>
       <!-- <div
-        class="mx-auto w-[300px]"
+       
         x-data="{ fields: {
           1: { key: 'comment[author]', placeholder: 'Your name' },
           2: { key: 'email', placeholder: 'Your email' }
         } }"
       >
         <template x-for="[id, field] in Object.entries(fields)" :key="id">
-          <div class="flex flex-col">
+          <div>
             <label
               x-bind:for="id"
-              class="text-gray-700 font-medium"
+             
               x-text="field.placeholder"
             ></label>
-            <input :placeholder="field.placeholder" x-bind:name="id" type="text" class="p-3 border-2 rounded-sm">
+            <input :placeholder="field.placeholder" x-bind:name="id" type="text">
           </div>
         </template>
       </div> -->
