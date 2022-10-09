@@ -17,6 +17,6 @@ body {
 [x-cloak] { display: none !important; }
 
 /* TODO: remove the following */
-/* #admin-bar-iframe {
+#admin-bar-iframe, #preview-bar-iframe {
   display: none;
-} */
+}

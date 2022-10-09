@@ -21,6 +21,6 @@ body {
 }
 
 /* TODO: remove the following */
-/* #admin-bar-iframe {
+#admin-bar-iframe, #preview-bar-iframe {
   display: none;
-} */
+}
