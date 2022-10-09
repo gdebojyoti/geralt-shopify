@@ -16,9 +16,5 @@
   "bugs": {
     "url": "https://github.com/gdebojyoti/geralt-shopify/issues"
   },
-  "homepage": "https://github.com/gdebojyoti/geralt-shopify#readme",
-  "devDependencies": {
-    "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.18"
-  }
+  "homepage": "https://github.com/gdebojyoti/geralt-shopify#readme"
 }
