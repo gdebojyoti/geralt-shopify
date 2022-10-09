@@ -10,7 +10,8 @@
     {{ content_for_header }} <!-- Header hook for plugins -->
     
     {{ 'global.css' | asset_url | stylesheet_tag }}
-    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+    {{ 'common.css' | asset_url | stylesheet_tag }}
+    {% comment %} {{ 'tailwind.css' | asset_url | stylesheet_tag }} {% endcomment %}
     {% comment %} {{ 'application.js' | asset_url | script_tag }} {% endcomment %}
     <script src="{{ 'application.js' | asset_url }}" async></script>
     
