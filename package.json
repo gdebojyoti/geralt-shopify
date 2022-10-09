@@ -4,7 +4,7 @@
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
-    "start": "npx tailwind -i ./src/tailwind.css -o ./assets/tailwind.css --watch"
+    "start": "shopify theme serve"
   },
   "repository": {
     "type": "git",

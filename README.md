@@ -11,7 +11,6 @@ Tech stack - Liquid, TailwindCSS, AlpineJS
 
 * `shopify login` OR `shopify login --store <store link>`
 * `shopify theme serve`
-* `npx tailwind -i ./src/tailwind.css -o ./assets/tailwind.css --watch`
 
 
 ## Tailwind CSS stuff
