@@ -1,6 +1,6 @@
 <h1>{{ section.settings.title }}</h1>
 {% paginate collections by section.settings.count %}
-  <div class="flex justify-around flex-wrap">
+  <div>
     {% for collection in collections limit: 5 %}
       {% if collection.all_products_count > 0 %}
         <a href="{{ collection.url }}">

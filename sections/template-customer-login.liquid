@@ -1,4 +1,4 @@
-<div x-data="{ showLoginForm: true }" class="w-96 mx-auto">
+<div x-data="{ showLoginForm: true }">
   <div x-show="showLoginForm">
     <h2>Login</h2>
 
@@ -7,10 +7,10 @@
       <!-- form errors -->
       {{ form.errors | default_errors }}
     
-      <div class="flex flex-col">
+      <div>
         <label for="email">Email address</label>
         <input
-          class="border rounded-sm p-2"
+         
           type="email"
           id="email"
           name="customer[email]"
@@ -19,10 +19,10 @@
       </div>
     
       {% if form.password_needed %}
-        <div class="flex flex-col">
+        <div>
           <label for="password">Password</label>
           <input
-            class="border rounded-sm p-2"
+           
             type="password"
             id="password"
             name="customer[password]"
@@ -31,7 +31,7 @@
         </div>
       {% endif %}
     
-      <button class="rounded-sm bg-gray-800 text-white p-2" type="submit">Sign In</button>
+      <button type="submit">Sign In</button>
     
     {% endform %}
   </div>
@@ -44,10 +44,10 @@
       <!-- form errors -->
       {{ form.errors | default_errors }}
 
-      <div class="flex flex-col">
+      <div>
         <label for="recover_email">Email address</label>
         <input
-          class="border rounded-sm p-2"
+         
           type="email"
           id="recover_email"
           name="email"
@@ -55,7 +55,7 @@
           placeholder="harry.potter@hogwarts.com">
       </div>
 
-      <button class="rounded-sm bg-gray-800 text-white p-2" type="submit">Recover password</button>
+      <button type="submit">Recover password</button>
 
     {% endform %}
   </div>
@@ -63,16 +63,16 @@
   <u
     x-on:click="showLoginForm = !showLoginForm"
     x-text="showLoginForm ? 'Forgot password?' : 'Back to login'"
-    class="cursor-pointer">
+   >
     Forgot password?
   </u>
 
   <!-- guest login -->
   {% if shop.checkout.guest_login %}
-    <hr class="my-5">
-    <div class="flex justify-center">
+    <hr>
+    <div>
       {% form 'guest_login' %}
-        <button class="rounded-sm bg-gray-800 text-white p-2" type="submit">Continue as guest</button>
+        <button type="submit">Continue as guest</button>
       {% endform %}
     </div>
   {% endif %}

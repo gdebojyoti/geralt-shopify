@@ -1,6 +1,6 @@
 <!-- NOTE: pass `paginate` as parameter from parent; else the following won't work -->
 {% if paginate.pages > 0 %}
-  <nav role="navigation" class="flex space-x-2">
+  <nav role="navigation">
     <!-- previous page -->
     {% if paginate.previous %}
       <a href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>

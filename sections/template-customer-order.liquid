@@ -44,7 +44,7 @@
 <!-- 
 
 <h2>Billing Address</h2>
-<p><span>Payment Status:</span> <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
+<p><span>Payment Status:</span> <span>{{ order.financial_status }}</span></p>
 <p>{{ order.billing_address.name }}</p>
 <p>{{ order.billing_address.company }}</p>
 <p>{{ order.billing_address.street }}</p>
@@ -53,7 +53,7 @@
 <p>{{ order.billing_address.phone }}</p>
 
 <h2>Shipping Address</h2>
-<p><span>Fulfillment Status:</span><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></p>
+<p><span>Fulfillment Status:</span><span>{{ order.fulfillment_status }}</span></p>
 <p>{{ order.shipping_address.name }}</p>
 <p>{{ order.shipping_address.company }}</p>
 <p>{{ order.shipping_address.street }}</p>

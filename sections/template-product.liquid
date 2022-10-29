@@ -2,7 +2,8 @@
 
 <!-- swiper -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script async src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+{{ 'template-product.css' | asset_url | stylesheet_tag }}
 
 <style>
   .swiper-button-prev, .swiper-button-next {
@@ -23,24 +24,24 @@
 </style>
 
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div>
   <!-- media -->
-  <div class="product--media">
-    <div class="md:block hidden">
+  <div>
+    <div>
       {% for media in product.media %}
-        <div class="h-100">
+        <div>
           {% render 'product-media', media: media %}
         </div>
       {% endfor %}
     </div>
 
-    <div class="md:hidden">
+    <div>
       <!-- swiper carousel -->
-      <div class="swiper h-94">
-        <div class="swiper-wrapper">
+      <div>
+        <div>
           {% for media in product.media %}
-            <div class="swiper-slide">
-              <div class="h-80 overflow-hidden p-2">
+            <div>
+              <div>
                 {% render 'product-media', media: media %}
               </div>
             </div>
@@ -48,15 +49,15 @@
         </div>
 
         <!-- swiper controls -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
   </div>
   
   <!-- information -->
-  <div class="product--information">
+  <div>
     
     {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       {% assign selected_variant = product.selected_or_first_available_variant %}
@@ -73,7 +74,7 @@
           
           {% when 'price' %}
             <div id="price-{{ section.id }}">
-              <div class="line-through">{{ selected_variant.compare_at_price | money }}</div>
+              <div>{{ selected_variant.compare_at_price | money }}</div>
               <div>{{ selected_variant.price | money }}</div>
               {% if selected_variant.compare_at_price > selected_variant.price %}
                 <span>On Sale!</span>
@@ -117,7 +118,7 @@
           {% when 'quantity' %}
             <div>
               <label for="quantity-{{ section.id }}">Quantity</label>
-              <input class="border p-2" type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
+              <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
             </div>
           
           {% when 'description' %}

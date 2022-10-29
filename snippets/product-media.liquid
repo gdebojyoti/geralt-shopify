@@ -1,19 +1,18 @@
 {% case media.media_type %}
   {% when 'image' %}
     <img
-      class="w-full h-52 object-contain bg-zinc-200"
       src="{{ media | img_url: 'large' }}"
       alt="{{ media.preview_image.alt | escape }}"
     >
 
   {% when 'external_video' %}
-    {{ media | external_video_tag: class: 'w-full h-52' }}
+    {{ media | external_video_tag: class: '' }}
   
   {% when 'video' %}
-    {{ media | video_tag: controls: true, class: 'w-full h-52' }}
+    {{ media | video_tag: controls: true, class: '' }}
   
   {% when 'model' %}
-    {{ media | model_viewer_tag: class: 'w-full h-52' }}
+    {{ media | model_viewer_tag: class: '' }}
   
   {% else %}
     {{ media | media_tag }}
