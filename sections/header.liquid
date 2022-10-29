@@ -1,3 +1,5 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
 {% if section.settings.menu.links == blank %}
   {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 {% else %}
@@ -6,73 +8,65 @@
 
 <div x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
   <div>
-    <div>
-      <!-- name / logo -->
-      <h1>
-        {{ shop.name }}
-      </h1>
+    <!-- name / logo -->
+    <h1 class="desktop-only">
+      {{ shop.name }}
+    </h1>
 
-      <!-- mobile nav icon -->
-      <div>
-        <button x-on:click="mobileMenuOpen = true" type="button">
-          {% render 'icon-menu' %}
-        </button>
-      </div>
+    <!-- desktop nav menu -->
+    <nav class="desktop-only">
+      {% for link in main_menu_linklist %}
+        {% if link.links != blank %}
+          {% assign index = link.handle | replace: '-', '_' %}
+          <!-- NOTE: this handles multiple single-level dropdown menus; but it doesn't handle multi-level dropdown menus -->
+          <!-- TODO: handle multi-level nested dropdown menus -->
+          <div x-data="{ nav_open_{{ index }}: false }">
+            <button x-on:click="nav_open_{{ index }} = !nav_open_{{ index }}">
+              {{ link.title }}
+              {% render 'icon-chevron-down', class: '' %}
+            </button>
 
-      <!-- nav menu -->
-      <nav>
-        {% for link in main_menu_linklist %}
-          {% if link.links != blank %}
-            {% assign index = link.handle | replace: '-', '_' %}
-            <!-- NOTE: this handles multiple single-level dropdown menus; but it doesn't handle multi-level dropdown menus -->
-            <!-- TODO: handle multi-level nested dropdown menus -->
-            <div x-data="{ nav_open_{{ index }}: false }">
-              <button x-on:click="nav_open_{{ index }} = !nav_open_{{ index }}">
-                {{ link.title }}
-                {% render 'icon-chevron-down', class: '' %}
-              </button>
-
-              <div
-                x-transition:enter="transition ease-out duration-100"
-                x-transition:enter-start="opacity-0 translate-y-3"
-                x-transition:enter-end="opacity-100 translate-y-0"
-                x-transition:leave="transition ease-out duration-100"
-                x-transition:leave-start="opacity-100 translate-y-0"
-                x-transition:leave-end="opacity-0 translate-y-3"
-                x-show="nav_open_{{ index }}"
-                @click.away="nav_open_{{ index }}=false"
-               
-              >
+            <div
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="opacity-0 translate-y-3"
+              x-transition:enter-end="opacity-100 translate-y-0"
+              x-transition:leave="transition ease-out duration-100"
+              x-transition:leave-start="opacity-100 translate-y-0"
+              x-transition:leave-end="opacity-0 translate-y-3"
+              x-show="nav_open_{{ index }}"
+              @click.away="nav_open_{{ index }}=false"
+            >
+              <div>
                 <div>
-                  <div>
-                    {% for link in link.links %}
-                      <a href="{{ link.url }}">
-                        <div>{{ link.title }}</div>
-                      </a>
-                    {% endfor %}
-                  </div>
+                  {% for link in link.links %}
+                    <a href="{{ link.url }}">
+                      <div>{{ link.title }}</div>
+                    </a>
+                  {% endfor %}
                 </div>
               </div>
             </div>
-          {% else %}
-            {% assign isActive = link.current %}
-            <a href="{{ link.url }}">
-              {{ link.title }}
-            </a>
-          {% endif %}
-        {% endfor %}
-      </nav>
+          </div>
+        {% else %}
+          {% assign isActive = link.current %}
+          <a href="{{ link.url }}">
+            {{ link.title }}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
 
-      <!-- top right menu (search, cart, account) -->
-      <div>
-        <button x-on:click="searchBarOpen = true">
-          {% render 'icon-search' %}
-        </button>
+    <!-- top right menu (search, cart, account, menu) -->
+    <div class="primary-icon-set">
+      <button x-on:click="searchBarOpen = true" class="nav-icon">
+        {% render 'icon-search' %}
+      </button>
 
-        <a href="{{ routes.cart_url }}">
-          {% render 'icon-shopping-bag' %}
-        </a>
+      <a href="{{ routes.cart_url }}" class="nav-icon">
+        {% render 'icon-shopping-bag' %}
+      </a>
 
+      <div class="desktop-only">
         {% if shop.customer_account_enabled or shop.customer_accounts_optional %}
           {% if customer %}
             <a href="{{ routes.account_url }}">Account</a>
@@ -84,44 +78,49 @@
         {% endif %}
       </div>
 
-      <!-- mobile menu -->
-      <div x-show="mobileMenuOpen">
+      <!-- mobile nav icon -->
+      <button x-on:click="mobileMenuOpen = true" type="button" class="nav-icon">
+        {% render 'icon-menu' %}
+      </button>
+    </div>
+
+    <!-- mobile menu -->
+    <div x-cloak x-show="mobileMenuOpen">
+      <div>
         <div>
+          <!-- title, close -->
           <div>
-            <!-- title, close -->
-            <div>
-              <h1>
-                {{ section.settings.mobile_menu_title }}
-              </h1>
-              <button x-on:click="mobileMenuOpen=false">
-                {% render 'icon-x' %}
-              </button>
-            </div>
-
-            <!-- nav links -->
-            <nav>
-              {% for link in main_menu_linklist %}
-                {% if link.links != blank %}
-                  <div>
-                    <button>
-                      {{ link.title }}
-                      {% render 'icon-chevron-down', class: '' %}
-                    </button>
-
-                    <div>
-                      {% for link in link.links %}
-                        <a href="{{ link.url }}">
-                          {{ link.title }}
-                        </a>
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% else %}
-                  <a href="{{ link.url }}">{{ link.title }}</a>
-                {% endif %}
-              {% endfor %}
-            </nav>
+            <h1>
+              {{ section.settings.mobile_menu_title }}
+            </h1>
+            <button x-on:click="mobileMenuOpen=false">
+              {% render 'icon-x' %}
+            </button>
           </div>
+
+          <!-- nav links -->
+          <nav>
+            {% for link in main_menu_linklist %}
+              {% if link.links != blank %}
+                <div>
+                  <button>
+                    {{ link.title }}
+                    {% render 'icon-chevron-down', class: '' %}
+                  </button>
+
+                  <div>
+                    {% for link in link.links %}
+                      <a href="{{ link.url }}">
+                        {{ link.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endif %}
+            {% endfor %}
+          </nav>
         </div>
       </div>
     </div>

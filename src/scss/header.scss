@@ -1,0 +1,13 @@
+.primary-icon-set {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  height: var(--mobile-header-height);
+  padding: 0 20px;
+}
+
+.nav-icon {
+  margin-left: 10px;
+}
