@@ -13,6 +13,11 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+/* variables */
+:root {
+  --mobile-header-height: 70px;
+}
+
 /* for alpinejs - https://alpinejs.dev/directives/cloak */
 [x-cloak] { display: none !important; }
 

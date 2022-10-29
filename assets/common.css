@@ -1,3 +1,21 @@
+.mobile-only {
+  /* TODO: replace width with Scss variable */
+}
+@media (min-width: 1025px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.desktop-only {
+  /* TODO: replace width with Scss variable */
+}
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
 .icon-24 {
   width: 24px;
   height: 24px;

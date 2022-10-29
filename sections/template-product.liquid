@@ -1,8 +1,11 @@
 <!-- 4 types of media - photo, video, embedded video (YT), 3d models -->
 
 <!-- swiper -->
-<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-<script async src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+<script async id="swiper-script" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 {{ 'template-product.css' | asset_url | stylesheet_tag }}
 
 <style>
@@ -24,10 +27,10 @@
 </style>
 
 
-<div>
+<div class="template-product">
   <!-- media -->
   <div>
-    <div>
+    <div class="desktop-only">
       {% for media in product.media %}
         <div>
           {% render 'product-media', media: media %}
@@ -35,12 +38,12 @@
       {% endfor %}
     </div>
 
-    <div>
+    <div class="mobile-only">
       <!-- swiper carousel -->
-      <div>
-        <div>
+      <div class="swiper">
+        <div class="swiper-wrapper">
           {% for media in product.media %}
-            <div>
+            <div class="swiper-slide">
               <div>
                 {% render 'product-media', media: media %}
               </div>
@@ -49,20 +52,92 @@
         </div>
 
         <!-- swiper controls -->
-        <div></div>
-        <div></div>
-        <div></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </div>
   </div>
   
   <!-- information -->
-  <div>
+  <div class="product--information">
     
     {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       {% assign selected_variant = product.selected_or_first_available_variant %}
 
       <input type="hidden" name="id" value="{{ selected_variant.id }}">
+
+      <div class="product--info-1">
+        <div class="product--title-vendor">
+          <div class="product--title ">{{ product.title }}</div>
+          <div class="product--vendor">{{ product.vendor }}</div>
+        </div>
+
+        <div id="price-{{ section.id }}" class="product--price-wrapper">
+          {% if selected_variant.compare_at_price > selected_variant.price %}
+            <div class="product--sale-sign">On Sale!</div>
+          {% endif %}
+          <div class="product--actual-price">{{ selected_variant.price | money }}</div>
+          <div class="product--marked-price">{{ selected_variant.compare_at_price | money }}</div>
+        </div>
+      </div>
+
+      {% unless product.has_only_default_variant %}
+        <variant-selector
+          data-url="{{ product.url }}"
+          data-section="{{ section.id }}"
+        >
+          {% for option in product.options_with_values %}
+            <div class="product--variant">
+              <label for="option-{{ section.id }}-{{ forloop.index0 }}" class="product--variant-label">
+                {{ option.name }}
+              </label>
+              <select
+                name="options[{{ option.name | escape }}]"
+                id="option-{{ section.id }}-{{ forloop.index0 }}"
+                class="product--variant-options"
+              >
+                {% for value in option.values %}
+                  <option
+                    value="{{ value | escape }}"
+                    {% if option.selected_value == value %}
+                      selected="selected"
+                    {% endif %}
+                  >
+                    {{ value | escape }}
+                  </option>
+                {% endfor %}
+              </select>
+
+              <script type="application/json">
+                {{ product.variants | json }}
+              </script>
+            </div>
+
+          {% endfor %}
+        </variant-selector>
+      {% endunless %}
+
+      <div class="product--description">{{ product.description }}</div>
+
+      <div class="product--checkout-buttons">
+        {% if selected_variant.available %}
+          <quantity-selector class="product--quantity-selector">
+            <button data-qtyslctr="decrement" type="button">-</button>
+            <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
+            <button data-qtyslctr="increment" type="button">+</button>
+          </quantity-selector>
+
+          <button id="AddToCart" type="submit" name="add" class="product--add-to-cart-cta">
+            Add to cart
+          </button>
+        {% else %}
+          Sold out!
+        {% endif %}
+        <!-- <button type="submit">
+          Checkout
+        </button> -->
+      </div>
 
       {% for block in section.blocks %}
         {% case block.type %}
@@ -117,8 +192,8 @@
           
           {% when 'quantity' %}
             <div>
-              <label for="quantity-{{ section.id }}">Quantity</label>
-              <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
+              {% comment %} <label for="quantity-{{ section.id }}">Quantity</label>
+              <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}"> {% endcomment %}
             </div>
           
           {% when 'description' %}
@@ -146,6 +221,36 @@
     {% endform %}
   </div>
 </div>
+
+<script>
+  class QuantitySelector extends HTMLElement {
+    constructor () {
+      super()
+      this.addEventListener('click', this.onClick)
+    }
+
+    onClick (e) {
+      const button = e.target.dataset['qtyslctr']
+      // exit if increment / decrement button is not clicked
+      if (!button) {
+        return
+      }
+
+      // fetch input field
+      const inputField = document.getElementById('quantity-{{ section.id }}')
+      if (!inputField) {
+        return
+      }
+      
+      if (button === "increment") {
+        inputField.value++
+      } else if (button === "decrement") {
+        inputField.value > 1 && inputField.value--
+      }
+    }
+  }
+  customElements.define("quantity-selector", QuantitySelector)
+</script>
 
 <script>
   class VariantSelector extends HTMLElement {
@@ -215,17 +320,23 @@
   customElements.define("variant-selector", VariantSelector)
 </script>
 
-<script>
-  const swiper = new Swiper('.swiper', {
-    direction: 'horizontal',
-    pagination: {
-      el: '.swiper-pagination'
-    },
-    navigation: {
-      prevEl: '.swiper-button-prev',
-      nextEl: '.swiper-button-next'
-    }
-  })
+<script defer>
+  const script = document.getElementById('swiper-script')
+  if (script) {
+    script.addEventListener('load', () => {
+      const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        navigation: {
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next'
+        }
+      })
+    })
+    script.addEventListener('error', () => console.warn('Failed to load Swiper JS'))
+  }
 </script>
 
 {% schema %}
