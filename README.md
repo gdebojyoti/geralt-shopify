@@ -4,7 +4,7 @@ An upcoming theme for, well, Shopify!
 
 Base project - https://github.com/polidario/Elizabeth_Clean
 
-Tech stack - Liquid, TailwindCSS, AlpineJS
+Tech stack - Liquid, Scss, AlpineJS
 
 
 ## Setup
