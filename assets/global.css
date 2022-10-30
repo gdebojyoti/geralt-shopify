@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font: inherit;
 }
 
 html, body {
@@ -13,6 +14,7 @@ html, body {
 
 body {
   font-family: "Poppins", sans-serif;
+  font-size: 14px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -48,6 +50,7 @@ input[type=number] {
     --text-color-alt-primary: #2c2e2f;
     --background-color-primary: #2c2e2f;
     --background-color-secondary: #44464a;
+    --background-color-alt-primary: #f3f3f3;
     --background-color-alt-primary-rgb: 243, 243, 243;
   }
 }

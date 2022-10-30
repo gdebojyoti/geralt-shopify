@@ -69,7 +69,7 @@
 
       <div class="product--info-1">
         <div class="product--title-vendor">
-          <div class="product--title ">{{ product.title }}</div>
+          <h1 class="product--title ">{{ product.title }}</h1>
           <div class="product--vendor">{{ product.vendor }}</div>
         </div>
 
@@ -91,25 +91,33 @@
         >
           {% for option in product.options_with_values %}
             <div class="product--variant">
-              <label for="option-{{ section.id }}-{{ forloop.index0 }}" class="product--variant-label">
+              <label class="product--variant-label">
                 {{ option.name }}
               </label>
-              <select
-                name="options[{{ option.name | escape }}]"
-                id="option-{{ section.id }}-{{ forloop.index0 }}"
-                class="product--variant-options"
-              >
+              
+              <div class="product--variant-options">
                 {% for value in option.values %}
-                  <option
+                  <input
+                    type="radio"
+                    data-option
+                    id="options-{{ option.name | escape }}-{{ forloop.index0 }}"
+                    name="options[{{ option.name | escape }}]"
                     value="{{ value | escape }}"
+                    class="product--variant-option-radio"
                     {% if option.selected_value == value %}
-                      selected="selected"
+                      checked="checked"
                     {% endif %}
                   >
+                  <label
+                    for="options-{{ option.name | escape }}-{{ forloop.index0 }}"
+                    class="product--variant-option-label"
+                  >
                     {{ value | escape }}
-                  </option>
+                    
+                  </label>
                 {% endfor %}
-              </select>
+                
+              </div>
 
               <script type="application/json">
                 {{ product.variants | json }}
@@ -273,7 +281,7 @@
     }
 
     getSelectedOptions () {
-      this.options = Array.from(this.querySelectorAll('select'), select => select.value)
+      this.options = Array.from(this.querySelectorAll('input[data-option]:checked'), input => input.value)
     }
 
     getSelectedVariant () {

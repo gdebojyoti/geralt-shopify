@@ -29,7 +29,7 @@ body {
   }
 
   &--title {
-    // font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
     font-weight: 500;
   }
@@ -51,7 +51,7 @@ body {
     display: inline-block;
     margin-bottom: 5px;
     padding: 3px 8px;
-    color: #fffc;
+    color: var(--text-color-alt-primary);
     font-size: 10px;
     letter-spacing: .4px;
     text-transform: uppercase;
@@ -75,14 +75,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 15px;
+    margin-top: 22px;
   }
   &--variant-label {
     font-size: 14px;
     font-weight: 500;
   }
   &--variant-options {
-    margin-top: 7px;
+    margin-top: 12px;
+  }
+  &--variant-option-label {
+    margin-left: 10px;
+    padding: 4px 10px;
+    border: solid 1px var(--background-color-alt-primary);
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+  &--variant-option-radio {
+    display: none;
+
+    &:checked + label {
+      color: var(--text-color-alt-primary);
+      background-color: var(--background-color-alt-primary);
+    }
   }
   
   &--description {
@@ -138,7 +157,6 @@ body {
   height: 40px;
   padding: 0 20px;
   border: none;
-  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   background-color: #fff;
