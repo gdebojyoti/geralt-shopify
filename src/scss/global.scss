@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font: inherit;
 }
 html, body {
   width: 100%;
@@ -10,7 +11,51 @@ html, body {
   font: inherit;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* variables */
+:root {
+  --mobile-page-padding: 20px;
+  --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
+
+  // font configs
+  --description-line-height: 1.75;
+
+  // theme colors (primary, accent)
+
+  // text colors
+  --text-color-primary: #2c2e2f;
+  --text-color-secondary: #888;
+  --text-color-alt-primary: #f3f3f3;
+
+  // background colors
+  --background-color-primary: #f3f3f3;
+  --background-color-secondary: #fff;
+  --background-color-alt-primary: #2c2e2f;
+  --background-color-alt-primary-rgb: 44, 46, 47;
+
+  @media (prefers-color-scheme: light) {
+    --text-color-primary: #f3f3f3;
+    --text-color-alt-primary: #2c2e2f;
+
+    --background-color-primary: #2c2e2f;
+    --background-color-secondary: #44464a;
+    --background-color-alt-primary: #f3f3f3;
+    --background-color-alt-primary-rgb: 243, 243, 243;
+  }
 }
 
 /* for alpinejs - https://alpinejs.dev/directives/cloak */

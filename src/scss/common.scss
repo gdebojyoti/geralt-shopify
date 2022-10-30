@@ -1,3 +1,16 @@
+@import './partials/variables.scss';
+
+.mobile-only {
+  @media (min-width: $desktop-min-width) {
+    display: none;
+  }
+}
+.desktop-only {
+  @media (max-width: $mobile-max-width) {
+    display: none;
+  }
+}
+
 .icon-24 {
   width: 24px;
   height: 24px;

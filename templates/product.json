@@ -12,8 +12,8 @@
         "checkout_buttons": { "type": "checkout_buttons" }
       },
       "block_order": [
-        "vendor-tamatar",
         "title-murgi",
+        "vendor-tamatar",
         "price",
         "variant_selector",
         "quantity",
