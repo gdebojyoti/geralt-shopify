@@ -31,11 +31,9 @@ input[type=number] {
 
 /* variables */
 :root {
-  --mobile-page-padding: 15px;
+  --mobile-page-padding: 20px;
   --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
-  --description-line-height: 1.6
-  // theme colors (primary, accent)
-  // text colors
+  --description-line-height: 1.75;
   --text-color-primary: #2c2e2f;
   --text-color-secondary: #888;
   --text-color-alt-primary: #f3f3f3;

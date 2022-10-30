@@ -111,10 +111,7 @@
                   <label
                     for="options-{{ option.name | escape }}-{{ forloop.index0 }}"
                     class="product--variant-option-label"
-                  >
-                    {{ value | escape }}
-                    
-                  </label>
+                  >{{ value | escape }}</label>
                 {% endfor %}
                 
               </div>
@@ -139,7 +136,7 @@
           </quantity-selector>
 
           <button id="AddToCart" type="submit" name="add" class="cta product--add-to-cart-cta">
-            Add to cart
+            {% render 'icon-shopping-bag', class: '' %} Add to cart
           </button>
         {% else %}
           Sold out!

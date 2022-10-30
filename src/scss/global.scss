@@ -28,11 +28,11 @@ input[type=number] {
 
 /* variables */
 :root {
-  --mobile-page-padding: 15px;
+  --mobile-page-padding: 20px;
   --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
 
   // font configs
-  --description-line-height: 1.6
+  --description-line-height: 1.75;
 
   // theme colors (primary, accent)
 
