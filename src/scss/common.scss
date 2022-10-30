@@ -1,12 +1,12 @@
+@import './partials/variables.scss';
+
 .mobile-only {
-  /* TODO: replace width with Scss variable */
-  @media (min-width: 1025px) {
+  @media (min-width: $desktop-min-width) {
     display: none;
   }
 }
 .desktop-only {
-  /* TODO: replace width with Scss variable */
-  @media (max-width: 1024px) {
+  @media (max-width: $mobile-max-width) {
     display: none;
   }
 }
