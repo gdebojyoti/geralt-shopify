@@ -75,10 +75,12 @@
 
         <div id="price-{{ section.id }}" class="product--price-wrapper">
           {% if selected_variant.compare_at_price > selected_variant.price %}
-            <div class="product--sale-sign">On Sale!</div>
+            <span class="product--sale-sign">On Sale</span>
           {% endif %}
           <div class="product--actual-price">{{ selected_variant.price | money }}</div>
-          <div class="product--marked-price">{{ selected_variant.compare_at_price | money }}</div>
+          {% if selected_variant.compare_at_price > selected_variant.price %}
+            <div class="product--marked-price">{{ selected_variant.compare_at_price | money }}</div>
+          {% endif %}
         </div>
       </div>
 
@@ -122,13 +124,13 @@
 
       <div class="product--checkout-buttons">
         {% if selected_variant.available %}
-          <quantity-selector class="product--quantity-selector">
-            <button data-qtyslctr="decrement" type="button">-</button>
-            <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}">
-            <button data-qtyslctr="increment" type="button">+</button>
+          <quantity-selector class="quantity-selector">
+            <button data-qtyslctr="decrement" type="button" class="quantity-selector--button">-</button>
+            <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}" class="quantity-selector--display">
+            <button data-qtyslctr="increment" type="button" class="quantity-selector--button">+</button>
           </quantity-selector>
 
-          <button id="AddToCart" type="submit" name="add" class="product--add-to-cart-cta">
+          <button id="AddToCart" type="submit" name="add" class="cta product--add-to-cart-cta">
             Add to cart
           </button>
         {% else %}
@@ -139,6 +141,7 @@
         </button> -->
       </div>
 
+      {% comment %} 
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'vendor' %}
@@ -217,7 +220,7 @@
             <div>Unknown block!</div>
         {% endcase %}
       {% endfor %}
-      
+      {% endcomment %}
     {% endform %}
   </div>
 </div>

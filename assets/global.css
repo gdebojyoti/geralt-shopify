@@ -12,12 +12,44 @@ html, body {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 /* variables */
 :root {
-  --mobile-header-height: 70px;
+  --mobile-page-padding: 15px;
+  --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
+  --description-line-height: 1.6
+  // theme colors (primary, accent)
+  // text colors
+  --text-color-primary: #2c2e2f;
+  --text-color-secondary: #888;
+  --text-color-alt-primary: #f3f3f3;
+  --background-color-primary: #f3f3f3;
+  --background-color-secondary: #fff;
+  --background-color-alt-primary: #2c2e2f;
+  --background-color-alt-primary-rgb: 44, 46, 47;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-color-primary: #f3f3f3;
+    --text-color-alt-primary: #2c2e2f;
+    --background-color-primary: #2c2e2f;
+    --background-color-secondary: #44464a;
+    --background-color-alt-primary-rgb: 243, 243, 243;
+  }
 }
 
 /* for alpinejs - https://alpinejs.dev/directives/cloak */
