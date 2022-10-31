@@ -1,5 +1,10 @@
 .template-collection {
   margin-top: calc(0% - var(--mobile-header-height));
+  padding-bottom: 60px;
+
+  .pagination {
+    margin-top: 30px;
+  }
 }
 
 .collection {
@@ -46,10 +51,20 @@
   &__results {
     padding: var(--mobile-page-padding);
   }
+  &__results-top-part {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  &__prev-link {
+    color: var(--text-color-primary);
+    text-decoration: none;
+  }
   &__result-count {
     color: var(--text-color-secondary);
-    font-size: 12px;
-    text-align: right;
+    /* not needed till "collection__results-top-part" exists */
+    // font-size: 12px;
+    // text-align: right;
   }
 
   &__product-cards {

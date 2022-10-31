@@ -1,5 +1,9 @@
 .template-collection {
   margin-top: calc(0% - var(--mobile-header-height));
+  padding-bottom: 60px;
+}
+.template-collection .pagination {
+  margin-top: 30px;
 }
 
 .collection__hero {
@@ -37,10 +41,18 @@
 .collection__results {
   padding: var(--mobile-page-padding);
 }
+.collection__results-top-part {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.collection__prev-link {
+  color: var(--text-color-primary);
+  text-decoration: none;
+}
 .collection__result-count {
   color: var(--text-color-secondary);
-  font-size: 12px;
-  text-align: right;
+  /* not needed till "collection__results-top-part" exists */
 }
 .collection__product-cards {
   display: flex;

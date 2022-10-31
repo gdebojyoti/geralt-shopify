@@ -1,3 +1,24 @@
 .pagination {
+  width: 100%;
+  text-align: center;
   
+  &__link {
+    padding: 4px 10px;
+    color: var(--text-color-primary);
+    font-size: 12px;
+    background-color: var(--background-color-secondary);
+    border-radius: 3px;
+    text-decoration: none;
+
+    &--non-link {
+      padding-inline: 2px;
+      background-color: transparent;
+    }
+
+    &--adjacent {
+      padding-inline: 2px;
+      font-size: 10px;
+      background-color: transparent;
+    }
+  }
 }

@@ -9,7 +9,10 @@
   </header>
 
   <section class="collection__results">
-    <div class="collection__result-count">{{ collection.products_count }} Products</div>
+    <div class="collection__results-top-part">
+      <a class="collection__prev-link" href="{{ routes.collections_url }}">< All Collections</a>
+      <div class="collection__result-count">{{ collection.products_count }} Products</div>
+    </div>
 
     <div class="collection__product-cards">
       {% paginate collection.products by section.settings.count %}
@@ -24,9 +27,6 @@
     </div>
   </section>
 </div>
-
-<!-- link to all collections -->
-<a href="{{ routes.collections_url }}">Go back to Collections</a>
 
 {% schema %}
 {

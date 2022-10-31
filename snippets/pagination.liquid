@@ -5,7 +5,7 @@
   <nav role="navigation" class="pagination">
     <!-- previous page -->
     {% if paginate.previous %}
-      <a href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
+      <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--adjacent">{{ paginate.previous.title }}</a>
     {% endif %}
 
     {% for part in paginate.parts %}
@@ -14,13 +14,13 @@
         <a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a>
       {% else %}
         <!-- for current page & "..." -->
-        <span class="pagination__link">{{ part.title }}</span>
+        <span class="pagination__link pagination__link--non-link">{{ part.title }}</span>
       {% endif %}
     {% endfor %}
 
     <!-- next page -->
     {% if paginate.next %}
-      <a href="{{ paginate.next.url }}">{{ paginate.next.title }}</a>
+      <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--adjacent">{{ paginate.next.title }}</a>
     {% endif %}
   </nav>
 {% endif %}
