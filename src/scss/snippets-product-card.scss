@@ -1,7 +1,7 @@
 .product-card {
   position: relative;
 
-  &--label {
+  &__label {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -16,13 +16,13 @@
     pointer-events: none; /* allow click through to product card */
   }
 
-  &--link {
+  &__link {
     display: block;
     color: var(--text-color-primary);
     text-decoration: none;
   }
 
-  &--image {
+  &__image {
     object-fit: cover;
     display: block;
     width: 100%;
@@ -30,11 +30,11 @@
     border-radius: 10px;
   }
 
-  &--title {
+  &__title {
     margin-top: 10px;
   }
   
-  &--vendor {
+  &__vendor {
     margin-top: 5px;
     color: var(--text-color-secondary);
     font-size: 12px;
@@ -42,15 +42,15 @@
     text-transform: uppercase;
   }
   
-  &--prices {
+  &__prices {
     display: flex;
     align-items: center;
     margin-top: 10px;
   }
-  &--price {
+  &__price {
     font-weight: 500;
   }
-  &--marked-price {
+  &__marked-price {
     margin-left: 5px;
     color: var(--text-color-secondary);
     font-size: 12px;

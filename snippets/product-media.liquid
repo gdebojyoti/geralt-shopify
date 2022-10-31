@@ -3,17 +3,17 @@
     <img
       src="{{ media | img_url: 'large' }}"
       alt="{{ media.preview_image.alt | escape }}"
-      class="product--media"
+      class="product__media"
     >
 
   {% when 'external_video' %}
-    {{ media | external_video_tag: class: 'product--media' }}
+    {{ media | external_video_tag: class: 'product__media' }}
   
   {% when 'video' %}
-    {{ media | video_tag: controls: true, class: 'product--media' }}
+    {{ media | video_tag: controls: true, class: 'product__media' }}
   
   {% when 'model' %}
-    {{ media | model_viewer_tag: class: 'product--media' }}
+    {{ media | model_viewer_tag: class: 'product__media' }}
   
   {% else %}
     {{ media | media_tag }}

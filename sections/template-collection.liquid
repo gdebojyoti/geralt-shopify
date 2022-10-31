@@ -2,16 +2,16 @@
 {{ 'snippets-product-card.css' | asset_url | stylesheet_tag }}
 
 <div class="template-collection">
-  <header class="collection--hero">
-    <img src="{{ collection.featured_image | image_url: width: 500 }}" loading="eager" class="collection--hero-image">
-    <h1 class="collection--hero-title">{{ collection.title }}</h1>
-    <div class="collection--hero-description">{{ collection.description }}</div>
+  <header class="collection__hero">
+    <img src="{{ collection.featured_image | image_url: width: 500 }}" loading="eager" class="collection__hero-image">
+    <h1 class="collection__hero-title">{{ collection.title }}</h1>
+    <div class="collection__hero-description">{{ collection.description }}</div>
   </header>
 
-  <section class="collection--results">
-    <div class="collection--result-count">{{ collection.products_count }} Products</div>
+  <section class="collection__results">
+    <div class="collection__result-count">{{ collection.products_count }} Products</div>
 
-    <div class="collection--product-cards">
+    <div class="collection__product-cards">
       {% paginate collection.products by section.settings.count %}
         {% for product in collection.products %}
           {% render 'product-card', product: product %}

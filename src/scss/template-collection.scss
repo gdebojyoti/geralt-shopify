@@ -3,7 +3,7 @@
 }
 
 .collection {
-  &--hero {
+  &__hero {
     position: relative;
     padding: 150px var(--mobile-page-padding) calc(2 * var(--mobile-page-padding));
     color: var(--text-color-alt-primary);
@@ -16,7 +16,7 @@
     // );
     background-color: #000c;
   }
-  &--hero-image {
+  &__hero-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -25,11 +25,11 @@
     width: 100%;
     height: 100%;
   }
-  &--hero-title {
+  &__hero-title {
     font-size: 30px;
     font-weight: 500;
   }
-  &--hero-description {
+  &__hero-description {
     font-size: 12px;
     line-height: var(--description-line-height);
 
@@ -43,16 +43,16 @@
     }
   }
 
-  &--results {
+  &__results {
     padding: var(--mobile-page-padding);
   }
-  &--result-count {
+  &__result-count {
     color: var(--text-color-secondary);
     font-size: 12px;
     text-align: right;
   }
 
-  &--product-cards {
+  &__product-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

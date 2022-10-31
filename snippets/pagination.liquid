@@ -11,10 +11,10 @@
     {% for part in paginate.parts %}
       {% if part.is_link %}
         <!-- page number link -->
-        <a href="{{ part.url }}" class="pagination--link">{{ part.title }}</a>
+        <a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a>
       {% else %}
         <!-- for current page & "..." -->
-        <span class="pagination--link">{{ part.title }}</span>
+        <span class="pagination__link">{{ part.title }}</span>
       {% endif %}
     {% endfor %}
 

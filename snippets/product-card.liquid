@@ -1,23 +1,23 @@
 <!-- NOTE: pass `product` as parameter from parent; else the following won't work -->
 <article class="product-card">
-  <span class="product-card--label">Sale</span>
-  <a href="{{ product.url }}" class="product-card--link">
+  <span class="product-card__label">Sale</span>
+  <a href="{{ product.url }}" class="product-card__link">
     {% if product.featured_image %}
       <img
         src="{{ product.featured_image | image_url: width: 200 }}"
         alt="{{ product.featured_image.alt }}"
         loading="eager"
-        class="product-card--image"
+        class="product-card__image"
       >
     {% else %}
       {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
     {% endif %}
-    <div class="product-card--title">{{ product.title }}</div>
-    <div class="product-card--vendor">{{ product.vendor }}</div>
+    <div class="product-card__title">{{ product.title }}</div>
+    <div class="product-card__vendor">{{ product.vendor }}</div>
 
-    <div class="product-card--prices">
-      <div class="product-card--price">{{ product.price | money }}</div>
-      <div class="product-card--marked-price">{{ product.compare_at_price | money }}</div>
+    <div class="product-card__prices">
+      <div class="product-card__price">{{ product.price | money }}</div>
+      <div class="product-card__marked-price">{{ product.compare_at_price | money }}</div>
     </div>
   </a>
 </article>

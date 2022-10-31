@@ -60,26 +60,26 @@
   </div>
   
   <!-- information -->
-  <div class="product--information">
+  <div class="product__information">
     
     {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       {% assign selected_variant = product.selected_or_first_available_variant %}
 
       <input type="hidden" name="id" value="{{ selected_variant.id }}">
 
-      <div class="product--info-1">
-        <div class="product--title-vendor">
-          <h1 class="product--title ">{{ product.title }}</h1>
-          <div class="product--vendor">{{ product.vendor }}</div>
+      <div class="product__info-1">
+        <div class="product__title-vendor">
+          <h1 class="product__title">{{ product.title }}</h1>
+          <div class="product__vendor">{{ product.vendor }}</div>
         </div>
 
-        <div id="price-{{ section.id }}" class="product--price-wrapper">
+        <div id="price-{{ section.id }}" class="product__price-wrapper">
           {% if selected_variant.compare_at_price > selected_variant.price %}
-            <span class="product--sale-sign">On Sale</span>
+            <span class="product__sale-sign">On Sale</span>
           {% endif %}
-          <div class="product--actual-price">{{ selected_variant.price | money }}</div>
+          <div class="product__actual-price">{{ selected_variant.price | money }}</div>
           {% if selected_variant.compare_at_price > selected_variant.price %}
-            <div class="product--marked-price">{{ selected_variant.compare_at_price | money }}</div>
+            <div class="product__marked-price">{{ selected_variant.compare_at_price | money }}</div>
           {% endif %}
         </div>
       </div>
@@ -90,12 +90,12 @@
           data-section="{{ section.id }}"
         >
           {% for option in product.options_with_values %}
-            <div class="product--variant">
-              <label class="product--variant-label">
+            <div class="product__variant">
+              <label class="product__variant-label">
                 {{ option.name }}
               </label>
               
-              <div class="product--variant-options">
+              <div class="product__variant-options">
                 {% for value in option.values %}
                   <input
                     type="radio"
@@ -103,14 +103,14 @@
                     id="options-{{ option.name | escape }}-{{ forloop.index0 }}"
                     name="options[{{ option.name | escape }}]"
                     value="{{ value | escape }}"
-                    class="product--variant-option-radio"
+                    class="product__variant-option-radio"
                     {% if option.selected_value == value %}
                       checked="checked"
                     {% endif %}
                   >
                   <label
                     for="options-{{ option.name | escape }}-{{ forloop.index0 }}"
-                    class="product--variant-option-label"
+                    class="product__variant-option-label"
                   >{{ value | escape }}</label>
                 {% endfor %}
                 
@@ -125,17 +125,17 @@
         </variant-selector>
       {% endunless %}
 
-      <div class="product--description">{{ product.description }}</div>
+      <div class="product__description">{{ product.description }}</div>
 
-      <div class="product--checkout-buttons">
+      <div class="product__checkout-buttons">
         {% if selected_variant.available %}
           <quantity-selector class="quantity-selector">
-            <button data-qtyslctr="decrement" type="button" class="quantity-selector--button">-</button>
-            <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}" class="quantity-selector--display">
-            <button data-qtyslctr="increment" type="button" class="quantity-selector--button">+</button>
+            <button data-qtyslctr="decrement" type="button" class="quantity-selector__button">-</button>
+            <input type="number" name="quantity" value="1" min="1" id="quantity-{{ section.id }}" class="quantity-selector__display">
+            <button data-qtyslctr="increment" type="button" class="quantity-selector__button">+</button>
           </quantity-selector>
 
-          <button id="AddToCart" type="submit" name="add" class="cta product--add-to-cart-cta">
+          <button id="AddToCart" type="submit" name="add" class="cta product__add-to-cart-cta">
             {% render 'icon-shopping-bag', class: '' %} Add to cart
           </button>
         {% else %}
