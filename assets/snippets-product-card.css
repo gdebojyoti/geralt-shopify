@@ -13,6 +13,7 @@
   font-weight: 500;
   background-color: var(--background-color-alt-primary);
   border-radius: 20px;
+  pointer-events: none; /* allow click through to product card */
 }
 .product-card--link {
   display: block;

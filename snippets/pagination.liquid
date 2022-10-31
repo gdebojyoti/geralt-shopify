@@ -1,6 +1,8 @@
 <!-- NOTE: pass `paginate` as parameter from parent; else the following won't work -->
+{{ 'snippets-pagination.css' | asset_url | stylesheet_tag }}
+
 {% if paginate.pages > 0 %}
-  <nav role="navigation">
+  <nav role="navigation" class="pagination">
     <!-- previous page -->
     {% if paginate.previous %}
       <a href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
@@ -9,10 +11,10 @@
     {% for part in paginate.parts %}
       {% if part.is_link %}
         <!-- page number link -->
-        <a href="{{ part.url }}">{{ part.title }}</a>
+        <a href="{{ part.url }}" class="pagination--link">{{ part.title }}</a>
       {% else %}
         <!-- for current page & "..." -->
-        <span>{{ part.title }}</span>
+        <span class="pagination--link">{{ part.title }}</span>
       {% endif %}
     {% endfor %}
 
