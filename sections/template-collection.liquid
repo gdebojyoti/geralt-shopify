@@ -1,15 +1,32 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'snippets-product-card.css' | asset_url | stylesheet_tag }}
+
+<div class="template-collection">
+  <header class="collection--hero">
+    <img src="{{ collection.featured_image | image_url: width: 500 }}" loading="eager" class="collection--hero-image">
+    <h1 class="collection--hero-title">{{ collection.title }}</h1>
+    <div class="collection--hero-description">{{ collection.description }}</div>
+  </header>
+
+  <section class="collection--results">
+    <div class="collection--result-count">{{ collection.products_count }} Products</div>
+
+    <div class="collection--product-cards">
+      {% paginate collection.products by section.settings.count %}
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% else %}
+          <p>No products found!</p>
+        {% endfor %}
+
+        {% render 'pagination', paginate: paginate %}
+      {% endpaginate %}
+    </div>
+  </section>
+</div>
+
 <!-- link to all collections -->
 <a href="{{ routes.collections_url }}">Go back to Collections</a>
-
-{% paginate collection.products by section.settings.count %}
-  {% for product in collection.products %}
-    {% render 'product-card', product: product %}
-  {% else %}
-    <p>No products found!</p>
-  {% endfor %}
-
-  {% render 'pagination', paginate: paginate %}
-{% endpaginate %}
 
 {% schema %}
 {
