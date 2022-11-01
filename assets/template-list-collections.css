@@ -1,6 +1,5 @@
 .template-list-collections {
-  margin-top: calc(0% - var(--mobile-header-height));
-  padding: calc(var(--mobile-page-padding) + 60px) var(--mobile-page-padding) 60px;
+  padding: var(--mobile-page-padding) var(--mobile-page-padding) 60px;
 }
 .template-list-collections__title {
   font-size: 20px;

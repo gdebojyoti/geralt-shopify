@@ -1,11 +1,20 @@
-<h1>{{ section.settings.title }}</h1>
-{% for product in section.settings.collection.products limit: section.settings.count %}
-  {% render 'product-card', product: product %}
-{% else %}
-  {% for item in (1..section.settings.count) %}
-    {% render 'product-card-placeholder' %}
-  {% endfor %}
-{% endfor %}
+{{ 'featured-collection.css' | asset_url | stylesheet_tag }}
+{{ 'snippets-product-card.css' | asset_url | stylesheet_tag }}
+
+<div class="featured-collection">
+  <h1 class="featured-collection__title">{{ section.settings.title }}</h1>
+  <p class="featured-collection__description">{{ section.settings.description }}</p>
+
+  <div class="featured-collection__product-cards">
+    {% for product in section.settings.collection.products limit: section.settings.count %}
+      {% render 'product-card', product: product %}
+    {% else %}
+      {% for item in (1..section.settings.count) %}
+        {% render 'product-card-placeholder' %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
 
 {% schema %}
 {
@@ -16,6 +25,12 @@
       "id": "title",
       "default": "Featured Collection",
       "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "A short description"
     },
     {
       "type": "collection",
