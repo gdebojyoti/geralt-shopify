@@ -1,0 +1,39 @@
+.template-list-collections {
+  padding: var(--mobile-page-padding) var(--mobile-page-padding) 60px;
+}
+.template-list-collections__title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+.template-list-collections__description {
+  text-align: center;
+}
+.template-list-collections .pagination {
+  margin-top: 30px;
+}
+
+.list-collections {
+  margin-top: 50px;
+}
+
+.collection-card {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  color: var(--text-color-primary);
+  text-decoration: none;
+}
+.collection-card__image {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 50%;
+  max-width: 200px;
+  height: 160px;
+  border-radius: 10px;
+}
+.collection-card__title {
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: 300;
+}

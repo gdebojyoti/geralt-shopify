@@ -1,0 +1,24 @@
+.featured-collection {
+  padding: var(--mobile-page-padding) var(--mobile-page-padding) 60px;
+}
+.featured-collection__title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+.featured-collection__description {
+  text-align: center;
+}
+.featured-collection__product-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 25px;
+}
+.featured-collection__product-cards .product-card {
+  width: calc((100% - var(--mobile-page-padding) + 5px) / 2);
+  margin-top: calc(var(--mobile-page-padding) + 5px);
+}
+.featured-collection__product-cards .product-card:nth-of-type(2n) {
+  margin-left: calc(var(--mobile-page-padding) - 5px);
+}

@@ -1,0 +1,21 @@
+.pagination {
+  width: 100%;
+  text-align: center;
+}
+.pagination__link {
+  padding: 4px 10px;
+  color: var(--text-color-primary);
+  font-size: 12px;
+  background-color: var(--background-color-secondary);
+  border-radius: 3px;
+  text-decoration: none;
+}
+.pagination__link--non-link {
+  padding-inline: 2px;
+  background-color: transparent;
+}
+.pagination__link--adjacent {
+  padding-inline: 2px;
+  font-size: 10px;
+  background-color: transparent;
+}
