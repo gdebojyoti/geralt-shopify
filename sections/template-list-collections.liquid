@@ -1,29 +1,40 @@
-<h1>{{ section.settings.title }}</h1>
-{% paginate collections by section.settings.count %}
-  <div>
-    {% for collection in collections limit: 5 %}
-      {% if collection.all_products_count > 0 %}
-        <a href="{{ collection.url }}">
-          {% if collection.featured_image != blank %}
-            {% assign img = collection.featured_image %}
-          {% else %}
-            {% assign img = collection.products.first.image %}
-          {% endif %}
+{{ 'template-list-collections.css' | asset_url | stylesheet_tag }}
 
-          {% if img != blank %}
-            <img src="{{ img | img_url: 'medium' }}" alt="{{ collection.title | escape }}">
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
-          {% endif %}
+<div class="template-list-collections">
+  <h1 class="template-list-collections__title">{{ section.settings.title }}</h1>
+  <p class="template-list-collections__description">{{ section.settings.description }}</p>
+  
+  <div class="list-collections">
+    
+    {% paginate collections by section.settings.count %}
+      {% for collection in collections limit: 5 %}
+        {% if collection.all_products_count > 0 %}
+          <a href="{{ collection.url }}" class="collection-card">
+            {% if collection.featured_image != blank %}
+              {% assign img = collection.featured_image %}
+            {% else %}
+              {% assign img = collection.products.first.image %}
+            {% endif %}
 
-          {{ collection.title | escape }}
-        </a>
-      {% endif %}
-    {% endfor %}
+            {% if img != blank %}
+              <img
+                src="{{ img | image_url: width: 500 }}"
+                alt="{{ collection.title | escape }}"
+                class="collection-card__image"
+                loading="eager"
+              >
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20 object-cover' }}
+            {% endif %}
 
-  </div>
-  {% render 'pagination', paginate: paginate %}
-{% endpaginate %}
+            <div class="collection-card__title">{{ collection.title | escape }}</div>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  {% endpaginate %}
+</div>
 
 {% schema %}
 {
@@ -33,7 +44,13 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "All collections"
+      "default": "Shop by collection"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "A short description for your collections"
     },
     {
       "type": "range",
