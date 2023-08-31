@@ -10,6 +10,7 @@ Tech stack - Liquid, Scss, AlpineJS
 
 * Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/) on your system
 * Run `npm i`
+* Run `npm start`
 
 
 ## Troubleshooting

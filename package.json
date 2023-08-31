@@ -4,7 +4,8 @@
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
-    "start": "shopify theme dev --store=https://the-imaginary-cardists.myshopify.com"
+    "start": "shopify theme dev --store=https://the-imaginary-cardists.myshopify.com",
+    "logout": "shopify auth logout"
   },
   "repository": {
     "type": "git",
