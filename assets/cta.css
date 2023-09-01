@@ -1,0 +1,14 @@
+.cta {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-inline: 15px;
+  color: var(--text-color-alt-primary__new);
+  background-color: var(--primary-color);
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.cta__icon {
+  margin-left: 5px;
+}

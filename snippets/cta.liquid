@@ -1,0 +1,8 @@
+<!-- NOTE: pass `text` & `link` as parameters from parent; else the following won't work -->
+
+{{ 'cta.css' | asset_url | stylesheet_tag }}
+
+<a class="cta {{ class }}" href="{{ link }}">
+  {{ text }}
+  <img src="{{ 'east.svg' | asset_url }}" alt="icon" class="cta__icon">
+</a>
