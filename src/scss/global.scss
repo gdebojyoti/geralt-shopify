@@ -11,10 +11,10 @@ html, body {
   font: inherit;
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--primary-font);
   font-size: 14px;
   color: var(--text-color-primary);
-  background-color: var(--background-color-primary);
+  background-color: var(--background-color-primary__new);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -30,13 +30,33 @@ input[type=number] {
 
 /* variables */
 :root {
+  // font configs
+  --primary-font: 'Roboto', sans-serif;
+  --decorative-font: 'Italiana', serif;
+
+  // theme colors (primary, accent)
+  --primary-color: #7f7f7f;
+
+  // text colors
+  --text-color-primary__new: #333;
+  --text-color-secondary__new: rgba(51, 51, 51, 0.54);
+  --text-color-tertiary__new: rgba(51, 51, 51, 0.81);
+  --text-color-alt-primary__new: #fff;
+
+  // background colors
+  --background-color-primary__new: #fff;
+  
+  // misc
+  --mobile-page-padding__new: 15px;
+
+  
+  /* DEPRECATION WARNING: all variables below this line are DEPRECATED */
+  
   --mobile-page-padding: 20px;
   --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
 
   // font configs
   --description-line-height: 1.75;
-
-  // theme colors (primary, accent)
 
   // text colors
   --text-color-primary: #2c2e2f;
