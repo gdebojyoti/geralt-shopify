@@ -1,0 +1,65 @@
+{{ 'hero-v1.css' | asset_url | stylesheet_tag }}
+
+<section class="hero-v1">
+  <div class="hero-v1__splash"></div>
+  
+  <h1 class="hero-v1__heading">{{ section.settings.heading }}</h1>
+  <h2 class="hero-v1__subheading">{{ section.settings.subheading }}</h2>
+  
+  <p class="hero-v1__description">{{ section.settings.description }}</p>
+
+  <div class="hero-v1__cta-wrapper">
+    {% assign selectedProduct = section.settings.product %}
+    {% render 'cta', text: section.settings.cta, link: selectedProduct.url, class: 'hero-v1__cta' %}
+    <div class="hero-v1__cta-side-text">
+      {{ section.settings.socialProofText }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero section | v1",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A Kick-ass heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A short subheading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "A short summary"
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "Button text",
+      "default": "View more"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select a product for CTA"
+    },
+    {
+      "type": "text",
+      "id": "socialProofText",
+      "label": "Social proof text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero v1" /* this name will appear in the dropdown list ("theme sections") */
+    }
+  ]
+}
+{% endschema %}

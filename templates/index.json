@@ -1,5 +1,9 @@
 {
   "sections": {
+    "hero-v1": {
+      "type": "hero-v1",
+      "settings": {}
+    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -10,6 +14,7 @@
     }
   },
   "order": [
+    "hero-v1",
     "featured-collection"
   ]
 }
