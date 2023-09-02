@@ -42,6 +42,7 @@ input[type=number] {
   --text-color-alt-primary__new: #fff;
   --background-color-primary__new: #fff;
   --mobile-page-padding__new: 15px;
+  --mobile-section-vertical-gap: 70px;
   /* DEPRECATION WARNING: all variables below this line are DEPRECATED */
   --mobile-page-padding: 20px;
   --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));

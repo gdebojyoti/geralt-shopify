@@ -4,6 +4,10 @@
       "type": "hero-v1",
       "settings": {}
     },
+    "features-v1": {
+      "type": "features-v1",
+      "settings": {}
+    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -15,6 +19,7 @@
   },
   "order": [
     "hero-v1",
+    "features-v1",
     "featured-collection"
   ]
 }
