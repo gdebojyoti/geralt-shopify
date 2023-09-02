@@ -1,0 +1,65 @@
+{{ 'section-content.css' | asset_url | stylesheet_tag }}
+
+{% assign layout_type = section.settings.layout %}
+<section class="content content--style{{ layout_type }}">
+  <h2 class="content__heading">{{ section.settings.heading }}</h2>
+  <div class="content__details">{{ section.settings.details }}</div>
+  {% assign selectedProduct = section.settings.product %}
+  {% render 'cta', text: section.settings.cta, link: selectedProduct.url, class: 'content__cta' %}
+</section>
+
+{% schema %}
+{
+  "name": "Content",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style #1"
+        },
+        {
+          "value": "2",
+          "label": "Style #2"
+        },
+        {
+          "value": "3",
+          "label": "Style #3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A new section"
+    },
+    {
+      "type": "richtext",
+      "id": "details",
+      "label": "Details",
+      "default": "<p>Edit this details text and witness the real-time updates in action as your content changes instantly</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "Button text",
+      "default": "Show me"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select a product for CTA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content" /* this name will appear in the dropdown list ("theme sections") */
+    }
+  ]
+}
+{% endschema %}

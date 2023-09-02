@@ -13,10 +13,18 @@ html, body {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--primary-font);
   font-size: 14px;
   color: var(--text-color-primary);
-  background-color: var(--background-color-primary);
+  background-color: var(--background-color-primary__new);
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -33,6 +41,19 @@ input[type=number] {
 
 /* variables */
 :root {
+  --primary-font: "Roboto", sans-serif;
+  --decorative-font: "Italiana", serif;
+  --primary-color: #7f7f7f;
+  --text-color-primary__new: #333;
+  --text-color-secondary__new: rgba(51, 51, 51, 0.54);
+  --text-color-tertiary__new: rgba(51, 51, 51, 0.81);
+  --text-color-alt-primary__new: #fff;
+  --background-color-primary__new: #fff;
+  --background-color-alt-primary__new: #333;
+  --separator-color-primary__new: #e7e7e7;
+  --mobile-page-padding__new: 15px;
+  --mobile-section-vertical-gap: 70px;
+  /* DEPRECATION WARNING: all variables below this line are DEPRECATED */
   --mobile-page-padding: 20px;
   --mobile-header-height: calc(30px + 2 * var(--mobile-page-padding));
   --description-line-height: 1.75;
