@@ -1,19 +1,26 @@
 {{ 'feature-v1.css' | asset_url | stylesheet_tag }}
 
-<section class="feature-v1">
-  {% for block in section.blocks %}
-    {% case block.type %}
-      {% when 'feature' %}
-        <div class="feature-v1__slide">
-          <h2 class="feature-v1__slide-title">
-            <img src="{{ block.settings.icon | image_url: height: 24 }}" alt="icon" class="feature-v1__slide-icon">
-            {{ block.settings.title }}
-          </h2>
-          <p class="feature-v1__slide-description">{{ block.settings.description }}</p>
-        </div>
-    {% endcase %}
-  {% endfor %}
-</section>
+{% assign count = 0 %}
+{% for block in section.blocks %}
+  {% assign count = count | plus: 1 %}
+{% endfor %}
+
+{% if count > 0 %}
+  <section class="feature-v1">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'feature' %}
+          <div class="feature-v1__slide">
+            <h2 class="feature-v1__slide-title">
+              <img src="{{ block.settings.icon | image_url: height: 24 }}" alt="icon" class="feature-v1__slide-icon">
+              {{ block.settings.title }}
+            </h2>
+            <p class="feature-v1__slide-description">{{ block.settings.description }}</p>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </section>
+{% endif %}
 
 {% schema %}
 {
