@@ -8,6 +8,19 @@
       "type": "features-v1",
       "settings": {}
     },
+    "content": {
+      "type": "content",
+      "settings": {
+        "heading": "A special section"
+      }
+    },
+    "content-2": {
+      "type": "content",
+      "settings": {
+        "heading": "About us",
+        "layout": "3"
+      }
+    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -20,6 +33,8 @@
   "order": [
     "hero-v1",
     "features-v1",
+    "content",
+    "content-2",
     "featured-collection"
   ]
 }
