@@ -19,6 +19,14 @@ body {
   background-color: var(--background-color-primary__new);
 }
 
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -41,6 +49,7 @@ input[type=number] {
   --text-color-tertiary__new: rgba(51, 51, 51, 0.81);
   --text-color-alt-primary__new: #fff;
   --background-color-primary__new: #fff;
+  --background-color-alt-primary__new: #333;
   --mobile-page-padding__new: 15px;
   --mobile-section-vertical-gap: 70px;
   /* DEPRECATION WARNING: all variables below this line are DEPRECATED */
