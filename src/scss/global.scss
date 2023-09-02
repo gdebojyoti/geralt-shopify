@@ -16,6 +16,12 @@ body {
   color: var(--text-color-primary);
   background-color: var(--background-color-primary__new);
 }
+strong {
+  font-weight: 700;
+}
+em {
+  font-style: italic;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -45,6 +51,7 @@ input[type=number] {
 
   // background colors
   --background-color-primary__new: #fff;
+  --background-color-alt-primary__new: #333;
   
   // misc
   --mobile-page-padding__new: 15px;
