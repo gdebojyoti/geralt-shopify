@@ -5,6 +5,13 @@
     height: 225px;
   }
 
+  &__video {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
   &__heading {
     font-size: 35px;
     line-height: 50px;

@@ -1,7 +1,15 @@
 {{ 'hero-v1.css' | asset_url | stylesheet_tag }}
 
 <section class="hero-v1">
-  <div class="hero-v1__splash"></div>
+  <div class="hero-v1__splash">
+    {% assign video_url = section.settings.video.sources[0].url  %}
+    <video
+      src="{{ video_url }}"
+      autoplay
+      loop
+      class="hero-v1__video"
+    >
+  </div>
   
   <h1 class="hero-v1__heading">{{ section.settings.heading }}</h1>
   <h2 class="hero-v1__subheading">{{ section.settings.subheading }}</h2>
@@ -21,6 +29,11 @@
 {
   "name": "Hero section | v1",
   "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Splash video"
+    },
     {
       "type": "text",
       "id": "heading",

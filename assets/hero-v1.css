@@ -4,6 +4,12 @@
 .hero-v1__splash {
   height: 225px;
 }
+.hero-v1__video {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
 .hero-v1__heading {
   font-size: 35px;
   line-height: 50px;
