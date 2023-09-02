@@ -21,12 +21,10 @@
         "layout": "3"
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
+    "accordion": {
+      "type": "accordion",
       "settings": {
-        "title": "Featured Collection",
-        "collection": "all",
-        "number": 4
+        "heading": "FAQ"
       }
     }
   },
@@ -35,6 +33,6 @@
     "features-v1",
     "content",
     "content-2",
-    "featured-collection"
+    "accordion"
   ]
 }
