@@ -1,15 +1,38 @@
 {
   "sections": {
-    "featured-collection": {
-      "type": "featured-collection",
+    "hero-v1": {
+      "type": "hero-v1",
+      "settings": {}
+    },
+    "features-v1": {
+      "type": "features-v1",
+      "settings": {}
+    },
+    "content": {
+      "type": "content",
       "settings": {
-        "title": "Featured Collection",
-        "collection": "all",
-        "number": 4
+        "heading": "A special section"
+      }
+    },
+    "content-2": {
+      "type": "content",
+      "settings": {
+        "heading": "About us",
+        "layout": "3"
+      }
+    },
+    "accordion": {
+      "type": "accordion",
+      "settings": {
+        "heading": "FAQ"
       }
     }
   },
   "order": [
-    "featured-collection"
+    "hero-v1",
+    "features-v1",
+    "content",
+    "content-2",
+    "accordion"
   ]
 }

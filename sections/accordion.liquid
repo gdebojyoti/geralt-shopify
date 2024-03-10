@@ -1,0 +1,88 @@
+{{ 'section-accordion.css' | asset_url | stylesheet_tag }}
+
+{% assign count = 0 %}
+{% for block in section.blocks %}
+  {% assign count = count | plus: 1 %}
+{% endfor %}
+
+{% if count > 0 %}
+  <section class="accordion">
+    <h2 class="accordion__heading">{{ section.settings.heading }}</h2>
+  
+    <div class="accordion__lines">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'line' %}
+            <label class="accordion__line">
+              <input type="checkbox" class="accordion__checkbox">
+              <div class="accordion__title-wrapper">
+                {% if block.settings.icon %}
+                  <img src="{{ block.settings.icon | image_url: height: 24 }}" alt="icon" class="accordion__icon">
+                {% endif %}
+                <h3 class="accordion__title">{{ block.settings.title }}</h3>
+                <img src="{{ 'chevron-right.png' | asset_url }}" alt="icon" class="accordion__dropdown-icon">
+              </div>
+              <div class="accordion__description">
+                {{ block.settings.description }}
+              </div>
+            </label>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Line",
+      "type": "line",
+      "settings": [
+        {
+          "id": "icon",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion"
+    },
+    {
+      "name": "FAQs",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": [
+        {
+          "type": "line"
+        },
+        {
+          "type": "line"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

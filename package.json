@@ -4,7 +4,8 @@
   "description": "Base project - https://github.com/polidario/Elizabeth_Clean",
   "main": "index.js",
   "scripts": {
-    "start": "shopify theme serve"
+    "start": "shopify theme dev --store=https://the-imaginary-cardists.myshopify.com",
+    "logout": "shopify auth logout"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/gdebojyoti/geralt-shopify/issues"
   },
-  "homepage": "https://github.com/gdebojyoti/geralt-shopify#readme"
+  "homepage": "https://github.com/gdebojyoti/geralt-shopify#readme",
+  "devDependencies": {
+    "@shopify/cli": "^3.47.5",
+    "@shopify/theme": "^3.47.5"
+  }
 }
