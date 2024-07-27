@@ -11,3 +11,44 @@
 .nav-icon {
   margin-left: 10px;
 }
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  padding: var(--mobile-page-padding) calc(var(--mobile-page-padding) + 60px) var(--mobile-page-padding) var(--mobile-page-padding);
+  background-color: rgba(0, 0, 0, 0);
+  transform: translateX(-100%);
+  transition: transform 0.2s ease, background-color 0s ease;
+}
+.mobile-nav::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: calc(100% - 60px);
+  background-color: var(--background-color-primary);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.54);
+}
+.mobile-nav--open {
+  transform: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, background-color 0.3s 0.3s ease;
+}
+.mobile-nav__close-btn {
+  position: absolute;
+  top: var(--mobile-page-padding);
+  right: calc(var(--mobile-page-padding) + 60px);
+  cursor: pointer;
+}
+.mobile-nav__links-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav__link {
+  margin-top: 10px;
+  padding-block: 7px;
+  color: var(--text-color-secondary);
+  font-weight: 500;
+  text-decoration: none;
+}

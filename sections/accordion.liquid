@@ -1,3 +1,31 @@
+{% comment %}
+ * This file represents the accordion section in a Shopify theme.
+ * It includes the HTML structure and Liquid logic for rendering the accordion.
+ * The section allows users to create a customizable accordion with multiple lines.
+ * Each line consists of an optional icon, a title, and a description.
+ * The section also provides a setting for the heading of the accordion.
+ *
+ * Liquid Variables:
+ * - section.settings.heading: The heading text for the accordion.
+ * - section.blocks: An array of blocks representing each line in the accordion.
+ *   - block.type: The type of block, which is always 'line' in this case.
+ *   - block.settings.icon: The URL of the optional icon for the line.
+ *   - block.settings.title: The title text for the line.
+ *   - block.settings.description: The description text for the line.
+ *
+ * Liquid Logic:
+ * - The 'count' variable is used to keep track of the number of blocks in the accordion.
+ * - The 'for' loop iterates over each block in the accordion and increments the 'count' variable.
+ * - The 'if' statement checks if there are any blocks in the accordion and renders the accordion section accordingly.
+ *
+ * Schema:
+ * - The 'schema' block defines the settings and blocks available for customization in the Shopify theme editor.
+ * - The 'name' field specifies the name of the section.
+ * - The 'settings' array defines the available settings for the section, including the 'heading' setting.
+ * - The 'blocks' array defines the available blocks for the section, including the 'line' block.
+ * - The 'presets' array defines pre-defined configurations for the section, including the 'Accordion' and 'FAQs' presets.
+{% endcomment %}
+
 {{ 'section-accordion.css' | asset_url | stylesheet_tag }}
 
 {% assign count = 0 %}
